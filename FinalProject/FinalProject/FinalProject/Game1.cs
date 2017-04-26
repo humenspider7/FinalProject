@@ -22,6 +22,7 @@ namespace FinalProject
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = false;
             Content.RootDirectory = "Content";
         }
 
@@ -69,6 +70,7 @@ namespace FinalProject
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            MouseState ms = Mouse.GetState();
 
             // TODO: Add your update logic here
 

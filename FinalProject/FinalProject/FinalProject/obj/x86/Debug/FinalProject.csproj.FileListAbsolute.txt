@@ -1,0 +1,16 @@
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\FinalProject.exe
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\FinalProject.pdb
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\Microsoft.Xna.Framework.dll
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\Microsoft.Xna.Framework.Game.dll
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.dll
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.dll
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.dll
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\Microsoft.Xna.Framework.xml
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\Microsoft.Xna.Framework.Game.xml
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.xml
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.xml
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.xml
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\obj\x86\Debug\FinalProject.csprojResolveAssemblyReference.cache
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\obj\x86\Debug\FinalProject.exe
+C:\Users\eahscs\Documents\GitHub\FinalProject\FinalProject\FinalProject\FinalProject\obj\x86\Debug\FinalProject.pdb
