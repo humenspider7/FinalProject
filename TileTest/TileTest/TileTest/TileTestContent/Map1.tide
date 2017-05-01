@@ -16,6 +16,21 @@
       <TileArray>
         <Row>
           <TileSheet Ref="Tiles" />
+          <Static Index="822" BlendMode="Alpha">
+            <Properties>
+              <Property Key="type" Type="String"><![CDATA[wall]]></Property>
+            </Properties>
+          </Static>
+          <Static Index="822" BlendMode="Alpha">
+            <Properties>
+              <Property Key="type" Type="String"><![CDATA[wall]]></Property>
+            </Properties>
+          </Static>
+          <Static Index="822" BlendMode="Alpha">
+            <Properties>
+              <Property Key="type" Type="String"><![CDATA[wall]]></Property>
+            </Properties>
+          </Static>
           <Static Index="822" BlendMode="Alpha" />
           <Static Index="822" BlendMode="Alpha" />
           <Static Index="822" BlendMode="Alpha" />
@@ -31,10 +46,11 @@
           <Static Index="822" BlendMode="Alpha" />
           <Static Index="822" BlendMode="Alpha" />
           <Static Index="822" BlendMode="Alpha" />
-          <Static Index="822" BlendMode="Alpha" />
-          <Static Index="822" BlendMode="Alpha" />
-          <Static Index="822" BlendMode="Alpha" />
-          <Static Index="822" BlendMode="Alpha" />
+          <Static Index="822" BlendMode="Alpha">
+            <Properties>
+              <Property Key="type" Type="String"><![CDATA[wall]]></Property>
+            </Properties>
+          </Static>
           <Static Index="822" BlendMode="Alpha" />
           <Static Index="822" BlendMode="Alpha" />
           <Static Index="822" BlendMode="Alpha" />
@@ -362,7 +378,11 @@
           <Static Index="822" BlendMode="Alpha" />
           <Static Index="822" BlendMode="Alpha" />
           <Static Index="822" BlendMode="Alpha" />
-          <Static Index="822" BlendMode="Alpha" />
+          <Static Index="822" BlendMode="Alpha">
+            <Properties>
+              <Property Key="type" Type="String"><![CDATA[wall]]></Property>
+            </Properties>
+          </Static>
           <Static Index="822" BlendMode="Alpha" />
           <Static Index="822" BlendMode="Alpha" />
           <Static Index="822" BlendMode="Alpha" />

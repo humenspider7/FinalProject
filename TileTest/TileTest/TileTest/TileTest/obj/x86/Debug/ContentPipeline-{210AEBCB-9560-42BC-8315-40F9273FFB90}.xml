@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Output>
-      <Time>2017-04-27T12:24:51.7076182-04:00</Time>
+      <Time>2017-05-01T11:02:37.6801179-04:00</Time>
     </Item>
     <Item>
       <Source>Map1.tide</Source>
@@ -17,10 +17,10 @@
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Map1.xnb</Output>
-      <Time>2017-04-27T12:35:06.8899034-04:00</Time>
+      <Time>2017-05-01T12:09:21.5278433-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
-        <Value>2017-04-27T12:24:51.7076182-04:00</Value>
+        <Value>2017-05-01T11:02:37.6801179-04:00</Value>
       </Dependency>
       <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
@@ -39,7 +39,7 @@
     <Assemblies>
       <Assembly>
         <Key>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\xTilePipeline\bin\x86\Debug\xTile.Pipeline.dll</Key>
-        <Value>2017-04-27T12:45:58.549615-04:00</Value>
+        <Value>2017-05-01T11:32:23.0444885-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>

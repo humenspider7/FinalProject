@@ -30,6 +30,7 @@ namespace TileTest
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            this.IsMouseVisible = true;
             Content.RootDirectory = "Content";
         }
 
@@ -117,6 +118,34 @@ namespace TileTest
 
             Layer layer = map.GetLayer("Test");
             Tile p = layer.PickTile(new Location(10, 10), new Size(m_viewPort.Width,m_viewPort.Height));
+
+            MouseState ms = Mouse.GetState();
+            Location pointer = new Location(ms.X + m_viewPort.X, ms.Y + m_viewPort.Y);
+
+            if (ms.LeftButton == ButtonState.Pressed)
+            {
+
+                /*Tile pt = layer.PickTile(pointer, new Size(m_viewPort.Width, m_viewPort.Height));
+                if (pt != null && pt.Properties.Count > 0)
+                {
+                    Window.Title = "w00t";
+                }
+                */
+                //Window.Title = (q == null ? "" : "" + q.Properties.Count);
+                Location q = layer.GetTileLocation(pointer) ;
+                if (layer.IsValidTileLocation(q))
+                {
+                    Tile pt = layer.Tiles[q.X, q.Y];
+                    Location loc = layer.ConvertLayerToMapLocation(q, new Size(m_viewPort.Width, m_viewPort.Height));
+
+                    Window.Title = (q == null ? "" : "" + q.X + " " + q.Y + " " + loc.X + " " + loc.Y + (pt.Properties.Count > 0 ? (String)pt.Properties["type"] : ""));
+                }
+
+                
+                
+                
+                
+            }
 
             // Limit ability to view offscreen
             m_viewPort.Location.X = Math.Max(0, m_viewPort.X);
