@@ -24,6 +24,7 @@ namespace TileTest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         xTile.Map map;
+        bool isAlGay = true;
         xTile.Dimensions.Rectangle m_viewPort;
         XnaDisplayDevice m_xnaDisplayDevice;
 
