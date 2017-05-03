@@ -23,10 +23,17 @@ namespace TileTest
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         xTile.Map map;
+
         bool isAlGay = true;
+
+        Texture2D spriteSheet;
+
         xTile.Dimensions.Rectangle m_viewPort;
         XnaDisplayDevice m_xnaDisplayDevice;
+        Sprite hero;
+
 
         public Game1()
         {
@@ -66,8 +73,9 @@ namespace TileTest
 
             map = Content.Load<Map>("Map1");
             map.LoadTileSheets(m_xnaDisplayDevice);
-            
 
+            spriteSheet = Content.Load<Texture2D>(@"DungeonCrawl_ProjectUtumnoTileset");
+            hero = new Sprite(new Vector2(32, 32), spriteSheet, new Microsoft.Xna.Framework.Rectangle(288, 161, 32, 32), Vector2.Zero);
 
 
         }
@@ -80,6 +88,39 @@ namespace TileTest
         {
             map.DisposeTileSheets(m_xnaDisplayDevice);
             map = null;
+        }
+
+        public bool isWall (Layer layer, int x, int y)
+        {
+            Location loc = new Location(x, y);
+
+            Location q = layer.GetTileLocation(loc);
+            if (layer.IsValidTileLocation(q))
+            {
+                if (layer.Tiles[q].TileIndex == 822)  // 813 or 822
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        protected bool canMove (Sprite sprite, Layer layer, Vector2 direction)
+        {
+            Vector2 location = sprite.Location + direction;
+
+            // Now check to see if location is moveable
+            if (!isWall(layer, (int)location.X+1, (int)location.Y) && 
+                !isWall(layer, (int)location.X-1+sprite.BoundingBoxRect.Width, (int)location.Y) && 
+                !isWall(layer, (int)location.X+1, (int)location.Y - 1 + sprite.BoundingBoxRect.Height) && 
+                !isWall(layer, (int)location.X-1 + sprite.BoundingBoxRect.Width, (int)location.Y - 1 + sprite.BoundingBoxRect.Height))
+            {
+                sprite.Location += direction;
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -116,8 +157,42 @@ namespace TileTest
             {
                 m_viewPort.Location.X -= 3;
             }
+            else if (kb.IsKeyDown(Keys.Down))
+            {
+                m_viewPort.Location.Y += 3;
+            }
+            else if (kb.IsKeyDown(Keys.Up))
+            {
+                m_viewPort.Location.Y -= 3;
+            }
+
 
             Layer layer = map.GetLayer("Test");
+
+            if (kb.IsKeyDown(Keys.A))
+            {
+                if (canMove(hero, layer, new Vector2(-2, 0)))
+                    hero.Location += new Vector2(-2, 0);
+            }
+            else if (kb.IsKeyDown(Keys.D))
+            {
+                if (canMove(hero, layer, new Vector2(2, 0)))
+                    hero.Location += new Vector2(2, 0);
+            }
+            else if (kb.IsKeyDown(Keys.W))
+            {
+                if (canMove(hero, layer, new Vector2(0, -2)))
+                    hero.Location += new Vector2(0, -2);
+            }
+            else if (kb.IsKeyDown(Keys.S))
+            {
+                if (canMove(hero, layer, new Vector2(0, 2)))
+                    hero.Location += new Vector2(0, 2);
+            }
+
+            
+
+
             Tile p = layer.PickTile(new Location(10, 10), new Size(m_viewPort.Width,m_viewPort.Height));
 
             MouseState ms = Mouse.GetState();
@@ -168,6 +243,9 @@ namespace TileTest
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             map.Draw(m_xnaDisplayDevice, m_viewPort, Location.Origin, false);
+            spriteBatch.Begin();
+            hero.Draw(spriteBatch, m_viewPort);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
