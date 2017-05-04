@@ -108,6 +108,9 @@ namespace TileTest
 
         protected bool canMove (Sprite sprite, Layer layer, Vector2 direction)
         {
+            Vector2 location = sprite.Center + direction;
+
+            /*
             Vector2 location = sprite.Location + direction;
 
             // Now check to see if location is moveable
@@ -119,9 +122,15 @@ namespace TileTest
                 sprite.Location += direction;
                 return true;
             }
+            */
+            if (!isWall(layer, (int)location.X, (int)location.Y))
+            {
+                return true;
+            }
 
             return false;
         }
+
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -169,28 +178,51 @@ namespace TileTest
 
             Layer layer = map.GetLayer("Test");
 
+            float duration = 0.2f;
             if (kb.IsKeyDown(Keys.A))
             {
-                if (canMove(hero, layer, new Vector2(-2, 0)))
-                    hero.Location += new Vector2(-2, 0);
+                if (canMove(hero, layer, new Vector2(-32, 0)))
+                    hero.AnimateMove(hero.Location + new Vector2(-32, 0), duration);
             }
             else if (kb.IsKeyDown(Keys.D))
             {
-                if (canMove(hero, layer, new Vector2(2, 0)))
-                    hero.Location += new Vector2(2, 0);
+                if (canMove(hero, layer, new Vector2(32, 0)))
+                    hero.AnimateMove(hero.Location + new Vector2(32, 0), duration);
             }
             else if (kb.IsKeyDown(Keys.W))
             {
-                if (canMove(hero, layer, new Vector2(0, -2)))
-                    hero.Location += new Vector2(0, -2);
+                if (canMove(hero, layer, new Vector2(0, -32)))
+                    hero.AnimateMove(hero.Location + new Vector2(0, -32), duration);
             }
             else if (kb.IsKeyDown(Keys.S))
             {
-                if (canMove(hero, layer, new Vector2(0, 2)))
-                    hero.Location += new Vector2(0, 2);
+                if (canMove(hero, layer, new Vector2(0, 32)))
+                    hero.AnimateMove(hero.Location + new Vector2(0, 32), duration);
             }
 
-            
+            Vector2 viewOffs = new Vector2(m_viewPort.Location.X, m_viewPort.Location.Y);
+            Vector2 screenPos = hero.Center - viewOffs;
+            Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(this.Window.ClientBounds.Width / 3, this.Window.ClientBounds.Height / 3, this.Window.ClientBounds.Width / 3, this.Window.ClientBounds.Height / 3);
+
+            if (!moveBox.Contains((int)screenPos.X, (int)screenPos.Y))
+            {
+                if (hero.Location.X < moveBox.Left)
+                {
+                    m_viewPort.Location.X -= 3;
+                }
+                else if (hero.Location.X > moveBox.Right)
+                {
+                    m_viewPort.Location.X += 3;
+                }
+                else if (hero.Location.Y > moveBox.Bottom)
+                {
+
+                }
+                else if (hero.Location.Y < moveBox.Top)
+                {
+
+                }
+            }
 
 
             Tile p = layer.PickTile(new Location(10, 10), new Size(m_viewPort.Width,m_viewPort.Height));
@@ -230,6 +262,7 @@ namespace TileTest
             m_viewPort.Location.Y = Math.Min(map.DisplayHeight - m_viewPort.Height, m_viewPort.Y);
 
             map.Update(gameTime.ElapsedGameTime.Milliseconds);
+            hero.Update(gameTime);
 
             base.Update(gameTime);
         }

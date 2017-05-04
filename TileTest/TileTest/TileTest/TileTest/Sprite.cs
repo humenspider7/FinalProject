@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TileTest
 {
+    public enum SpriteStates { IDLE, MOVING };
+
     public class Sprite
     {
         public Texture2D Texture;
@@ -25,6 +27,8 @@ namespace TileTest
         public int BoundingXPadding = 0;
         public int BoundingYPadding = 0;
 
+        public SpriteStates state = SpriteStates.IDLE;
+        private Vector2 target;
 
         protected Vector2 location = Vector2.Zero;
         protected Vector2 velocity = Vector2.Zero;
@@ -156,6 +160,16 @@ namespace TileTest
             }
 
             location += (velocity * elapsed);
+
+            if (state == SpriteStates.MOVING)
+            {
+                if (Math.Abs(Vector2.Distance(location, target)) <= 1f)
+                {
+                    location = target;
+                    velocity = Vector2.Zero;
+                    state = SpriteStates.IDLE;
+                }
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -170,6 +184,24 @@ namespace TileTest
                 1.0f,
                 SpriteEffects.None,
                 0.0f);
+        }
+
+        public void AnimateMove (Vector2 target, float duration)  // target is a translation of location, duration is in seconds
+        {
+            if (state == SpriteStates.MOVING)
+                return;
+
+            float dist = Vector2.Distance(location, target);
+            // d = vt, v = d/t
+            float speed = dist / duration;
+
+            Vector2 vel = target - location;
+            vel.Normalize(); 
+            vel *= speed;
+
+            this.target = target;
+            velocity = vel;
+            state = SpriteStates.MOVING;
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, xTile.Dimensions.Rectangle m_viewPort)
