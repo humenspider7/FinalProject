@@ -206,21 +206,21 @@ namespace TileTest
 
             if (!moveBox.Contains((int)screenPos.X, (int)screenPos.Y))
             {
-                if (hero.Location.X < moveBox.Left)
+                if (screenPos.X < moveBox.Left)
                 {
                     m_viewPort.Location.X -= 3;
                 }
-                else if (hero.Location.X > moveBox.Right)
+                if (screenPos.X > moveBox.Right)
                 {
                     m_viewPort.Location.X += 3;
                 }
-                else if (hero.Location.Y > moveBox.Bottom)
+                if (screenPos.Y > moveBox.Bottom)
                 {
-
+                    m_viewPort.Location.Y += 3;
                 }
-                else if (hero.Location.Y < moveBox.Top)
+                if (screenPos.Y < moveBox.Top)
                 {
-
+                    m_viewPort.Location.Y -= 3;
                 }
             }
 
