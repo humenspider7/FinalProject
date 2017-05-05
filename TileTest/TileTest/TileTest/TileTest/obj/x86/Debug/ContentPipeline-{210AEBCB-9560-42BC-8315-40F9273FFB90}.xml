@@ -24,6 +24,20 @@
       </Dependency>
       <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
+    <Item>
+      <Source>DemoMap.tide</Source>
+      <Name>DemoMap</Name>
+      <Importer>TideImporter</Importer>
+      <Processor>TideProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DemoMap.xnb</Output>
+      <Time>2017-05-05T12:45:50.3643069-04:00</Time>
+      <Dependency>
+        <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
+        <Value>2017-05-04T12:11:10.337233-04:00</Value>
+      </Dependency>
+      <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{210AEBCB-9560-42BC-8315-40F9273FFB90}</ContentProjectGUID>

@@ -41,6 +41,7 @@
       <Name>Map1</Name>
       <Importer>TideImporter</Importer>
       <Processor>TideProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +49,13 @@
       <Project>{5bad950d-bc43-4264-83ae-78a9fcbda27f}</Project>
       <Name>xTilePipeline</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DemoMap.tide">
+      <Name>DemoMap</Name>
+      <Importer>TideImporter</Importer>
+      <Processor>TideProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
