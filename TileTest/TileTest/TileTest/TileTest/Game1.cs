@@ -70,9 +70,11 @@ namespace TileTest
 
             m_xnaDisplayDevice = new XnaDisplayDevice(Content, GraphicsDevice);
 
-
             map = Content.Load<Map>("Map1");
             map.LoadTileSheets(m_xnaDisplayDevice);
+            //map = Content.Load<Map>("DemoMap");
+            //map.LoadTileSheets(m_xnaDisplayDevice);
+            
 
             spriteSheet = Content.Load<Texture2D>(@"DungeonCrawl_ProjectUtumnoTileset");
             hero = new Sprite(new Vector2(32, 32), spriteSheet, new Microsoft.Xna.Framework.Rectangle(288, 161, 32, 32), Vector2.Zero);
@@ -225,7 +227,7 @@ namespace TileTest
             }
 
 
-            Tile p = layer.PickTile(new Location(10, 10), new Size(m_viewPort.Width,m_viewPort.Height));
+            //Tile p = layer.PickTile(new Location(10, 10), new Size(m_viewPort.Width,m_viewPort.Height));
 
             MouseState ms = Mouse.GetState();
             Location pointer = new Location(ms.X + m_viewPort.X, ms.Y + m_viewPort.Y);
@@ -240,7 +242,7 @@ namespace TileTest
                 }
                 */
                 //Window.Title = (q == null ? "" : "" + q.Properties.Count);
-                Location q = layer.GetTileLocation(pointer) ;
+                Location q = layer.GetTileLocation(pointer);
                 if (layer.IsValidTileLocation(q))
                 {
                     Tile pt = layer.Tiles[q.X, q.Y];
@@ -275,8 +277,8 @@ namespace TileTest
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            map.Draw(m_xnaDisplayDevice, m_viewPort, Location.Origin, false);
             spriteBatch.Begin();
+            map.Draw(m_xnaDisplayDevice, m_viewPort, Location.Origin, false);
             hero.Draw(spriteBatch, m_viewPort);
             spriteBatch.End();
 
