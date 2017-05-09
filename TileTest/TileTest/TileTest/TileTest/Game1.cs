@@ -34,6 +34,8 @@ namespace TileTest
         XnaDisplayDevice m_xnaDisplayDevice;
         Sprite hero;
 
+        List<int> wallTypes;
+
 
         public Game1()
         {
@@ -53,6 +55,13 @@ namespace TileTest
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
+            wallTypes = new List<int>();
+            wallTypes.Add(821);// 821 is a wall
+            wallTypes.Add(881);//881 - 884 is lava
+            wallTypes.Add(882);
+            wallTypes.Add(883);
+            wallTypes.Add(884);
         }
 
         /// <summary>
@@ -70,10 +79,10 @@ namespace TileTest
 
             m_xnaDisplayDevice = new XnaDisplayDevice(Content, GraphicsDevice);
 
-            map = Content.Load<Map>("Map1");
-            map.LoadTileSheets(m_xnaDisplayDevice);
-            //map = Content.Load<Map>("DemoMap");
+            //map = Content.Load<Map>("Map1");
             //map.LoadTileSheets(m_xnaDisplayDevice);
+            map = Content.Load<Map>("DemoMap");
+            map.LoadTileSheets(m_xnaDisplayDevice);
             
 
             spriteSheet = Content.Load<Texture2D>(@"DungeonCrawl_ProjectUtumnoTileset");
@@ -99,7 +108,9 @@ namespace TileTest
             Location q = layer.GetTileLocation(loc);
             if (layer.IsValidTileLocation(q))
             {
-                if (layer.Tiles[q].TileIndex == 822)  // 813 or 822
+                Tile t = layer.Tiles[q];
+
+                if (t != null && (wallTypes.Contains(t.TileIndex) || (t.Properties.Count > 0 && t.Properties["type"] == "wall")))  // t.TileIndex == 822 // 813 or 822
                 {
                     return true;
                 }
@@ -178,7 +189,7 @@ namespace TileTest
             }
 
 
-            Layer layer = map.GetLayer("Test");
+            Layer layer = map.GetLayer("Ground");
 
             float duration = 0.2f;
             if (kb.IsKeyDown(Keys.A))
@@ -210,19 +221,19 @@ namespace TileTest
             {
                 if (screenPos.X < moveBox.Left)
                 {
-                    m_viewPort.Location.X -= 3;
+                    m_viewPort.Location.X -= 4;
                 }
                 if (screenPos.X > moveBox.Right)
                 {
-                    m_viewPort.Location.X += 3;
+                    m_viewPort.Location.X += 4;
                 }
                 if (screenPos.Y > moveBox.Bottom)
                 {
-                    m_viewPort.Location.Y += 3;
+                    m_viewPort.Location.Y += 4;
                 }
                 if (screenPos.Y < moveBox.Top)
                 {
-                    m_viewPort.Location.Y -= 3;
+                    m_viewPort.Location.Y -= 4;
                 }
             }
 

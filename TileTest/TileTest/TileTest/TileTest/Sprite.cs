@@ -163,7 +163,7 @@ namespace TileTest
 
             if (state == SpriteStates.MOVING)
             {
-                if (Math.Abs(Vector2.Distance(location, target)) <= 1f)
+                if (Math.Abs(Vector2.Distance(location, target)) <= 3f)
                 {
                     location = target;
                     velocity = Vector2.Zero;
