@@ -26,6 +26,8 @@ namespace TileTest
 
         xTile.Map map;
 
+        
+
         bool isAlGay = true;
 
         Texture2D spriteSheet;
@@ -40,6 +42,7 @@ namespace TileTest
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = true;
             this.IsMouseVisible = true;
             Content.RootDirectory = "Content";
         }
@@ -55,6 +58,8 @@ namespace TileTest
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
+           
 
             wallTypes = new List<int>();
             wallTypes.Add(821);// 821 is a wall
@@ -152,9 +157,12 @@ namespace TileTest
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            KeyboardState kb = Keyboard.GetState();
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+          
+
 
             // TODO: Add your update logic here
             /*
@@ -170,7 +178,7 @@ namespace TileTest
             m_viewPort.Location.Y -= (int)(leftThumbStick.Y * 4.0f);
              */
 
-            KeyboardState kb = Keyboard.GetState();
+            
             if (kb.IsKeyDown(Keys.Right))
             {
                 m_viewPort.Location.X += 3;
@@ -268,8 +276,10 @@ namespace TileTest
                 
             }
 
-            // Limit ability to view offscreen
-            m_viewPort.Location.X = Math.Max(0, m_viewPort.X);
+            
+
+                // Limit ability to view offscreen
+                m_viewPort.Location.X = Math.Max(0, m_viewPort.X);
             m_viewPort.Location.Y = Math.Max(0, m_viewPort.Y);
             m_viewPort.Location.X = Math.Min(map.DisplayWidth - m_viewPort.Width, m_viewPort.X);
             m_viewPort.Location.Y = Math.Min(map.DisplayHeight - m_viewPort.Height, m_viewPort.Y);
