@@ -38,11 +38,15 @@ namespace TileTest
 
         List<int> wallTypes;
 
+        RenderTarget2D rt;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = 576;
+            graphics.ApplyChanges();
             this.IsMouseVisible = true;
             Content.RootDirectory = "Content";
         }
@@ -93,7 +97,7 @@ namespace TileTest
             spriteSheet = Content.Load<Texture2D>(@"DungeonCrawl_ProjectUtumnoTileset");
             hero = new Sprite(new Vector2(32, 32), spriteSheet, new Microsoft.Xna.Framework.Rectangle(288, 161, 32, 32), Vector2.Zero);
 
-
+            rt = new RenderTarget2D(this.GraphicsDevice, 1024, 768);
         }
 
         /// <summary>
@@ -223,7 +227,8 @@ namespace TileTest
 
             Vector2 viewOffs = new Vector2(m_viewPort.Location.X, m_viewPort.Location.Y);
             Vector2 screenPos = hero.Center - viewOffs;
-            Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(this.Window.ClientBounds.Width / 3, this.Window.ClientBounds.Height / 3, this.Window.ClientBounds.Width / 3, this.Window.ClientBounds.Height / 3);
+            Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(this.Window.ClientBounds.Width / 2, this.Window.ClientBounds.Height / 2, this.Window.ClientBounds.Width / 2, this.Window.ClientBounds.Height / 2);
+            //Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(300, 300, 300, 200);
 
             if (!moveBox.Contains((int)screenPos.X, (int)screenPos.Y))
             {
@@ -298,11 +303,20 @@ namespace TileTest
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            //GraphicsDevice.SetRenderTarget(rt);
             spriteBatch.Begin();
             map.Draw(m_xnaDisplayDevice, m_viewPort, Location.Origin, false);
             hero.Draw(spriteBatch, m_viewPort);
             spriteBatch.End();
 
+
+            /*
+            GraphicsDevice.SetRenderTarget(null);
+
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone);
+            spriteBatch.Draw(rt, new Microsoft.Xna.Framework.Rectangle(0, 0, this.Window.ClientBounds.Width, this.Window.ClientBounds.Height), new Microsoft.Xna.Framework.Rectangle(0, 0, 1024/2, 768/2), Color.White);
+            spriteBatch.End();
+            */
             base.Draw(gameTime);
         }
     }
