@@ -41,6 +41,7 @@ namespace TileTest
         SpriteFont pericles14;
 
         List<int> wallTypes;
+        List<int> items;
 
         RenderTarget2D rt;
 
@@ -67,7 +68,8 @@ namespace TileTest
 
             base.Initialize();
 
-           
+            items = new List<int>();
+            items.Add(2924);//chest
 
             wallTypes = new List<int>();
             wallTypes.Add(821);// 821 is a wall
@@ -132,6 +134,12 @@ namespace TileTest
                 {
                     return true;
                 }
+
+                if (t != null && (items.Contains(t.TileIndex) || (t.Properties.Count > 0 && t.Properties["type"] == "item")))
+                {
+                    score++;
+                }
+
             }
             return false;
         }
