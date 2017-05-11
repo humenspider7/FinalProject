@@ -25,16 +25,20 @@ namespace TileTest
         SpriteBatch spriteBatch;
 
         xTile.Map map;
-
-        
-
-        bool isAlGay = true;
-
         Texture2D spriteSheet;
+        Texture2D heartSprite;
+
+        private Vector2 scoreLocation = new Vector2(800, 10);
+        private Vector2 healthLocation = new Vector2(20, 10);
+
+        public int score = 0;
 
         xTile.Dimensions.Rectangle m_viewPort;
+
         XnaDisplayDevice m_xnaDisplayDevice;
         Sprite hero;
+        Sprite health;
+        SpriteFont pericles14;
 
         List<int> wallTypes;
 
@@ -43,9 +47,9 @@ namespace TileTest
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
-            graphics.PreferredBackBufferWidth = 1024;
-            graphics.PreferredBackBufferHeight = 576;
+            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferWidth = 960;//960
+            graphics.PreferredBackBufferHeight = 540;//540
             graphics.ApplyChanges();
             this.IsMouseVisible = true;
             Content.RootDirectory = "Content";
@@ -92,10 +96,15 @@ namespace TileTest
             //map.LoadTileSheets(m_xnaDisplayDevice);
             map = Content.Load<Map>("DemoMap");
             map.LoadTileSheets(m_xnaDisplayDevice);
-            
-
+            pericles14 = Content.Load<SpriteFont>(@"Fonts\Pericles14");
+            heartSprite = Content.Load<Texture2D>(@"Textures\heartSprite");
             spriteSheet = Content.Load<Texture2D>(@"DungeonCrawl_ProjectUtumnoTileset");
+
+            
             hero = new Sprite(new Vector2(32, 32), spriteSheet, new Microsoft.Xna.Framework.Rectangle(288, 161, 32, 32), Vector2.Zero);
+
+
+            health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 32, 32), Vector2.Zero);
 
             rt = new RenderTarget2D(this.GraphicsDevice, 1024, 768);
         }
@@ -124,14 +133,11 @@ namespace TileTest
                     return true;
                 }
             }
-
             return false;
         }
-
         protected bool canMove (Sprite sprite, Layer layer, Vector2 direction)
         {
             Vector2 location = sprite.Center + direction;
-
             /*
             Vector2 location = sprite.Location + direction;
 
@@ -149,11 +155,8 @@ namespace TileTest
             {
                 return true;
             }
-
             return false;
         }
-
-
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -227,7 +230,7 @@ namespace TileTest
 
             Vector2 viewOffs = new Vector2(m_viewPort.Location.X, m_viewPort.Location.Y);
             Vector2 screenPos = hero.Center - viewOffs;
-            Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(this.Window.ClientBounds.Width / 2, this.Window.ClientBounds.Height / 2, this.Window.ClientBounds.Width / 2, this.Window.ClientBounds.Height / 2);
+            Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(this.Window.ClientBounds.Width / 3, this.Window.ClientBounds.Height / 3, this.Window.ClientBounds.Width / 3, this.Window.ClientBounds.Height / 3);
             //Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(300, 300, 300, 200);
 
             if (!moveBox.Contains((int)screenPos.X, (int)screenPos.Y))
@@ -235,18 +238,22 @@ namespace TileTest
                 if (screenPos.X < moveBox.Left)
                 {
                     m_viewPort.Location.X -= 4;
+                   
                 }
                 if (screenPos.X > moveBox.Right)
                 {
                     m_viewPort.Location.X += 4;
+                    
                 }
                 if (screenPos.Y > moveBox.Bottom)
                 {
                     m_viewPort.Location.Y += 4;
+                    
                 }
                 if (screenPos.Y < moveBox.Top)
                 {
                     m_viewPort.Location.Y -= 4;
+                    
                 }
             }
 
@@ -301,12 +308,22 @@ namespace TileTest
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             //GraphicsDevice.SetRenderTarget(rt);
             spriteBatch.Begin();
             map.Draw(m_xnaDisplayDevice, m_viewPort, Location.Origin, false);
             hero.Draw(spriteBatch, m_viewPort);
+            health.Draw(spriteBatch);
+
+            spriteBatch.DrawString(
+                pericles14, "Health:", healthLocation, Color.White);
+
+            spriteBatch.DrawString(
+                    pericles14,
+                    "Score: 0" , scoreLocation, Color.White);
+
+
             spriteBatch.End();
 
 
