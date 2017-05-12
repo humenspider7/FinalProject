@@ -27,6 +27,7 @@ namespace TileTest
         xTile.Map map;
         Texture2D spriteSheet;
         Texture2D heartSprite;
+        Texture2D link;
 
         private Vector2 scoreLocation = new Vector2(800, 10);
         private Vector2 healthLocation = new Vector2(20, 10);
@@ -101,12 +102,13 @@ namespace TileTest
             pericles14 = Content.Load<SpriteFont>(@"Fonts\Pericles14");
             heartSprite = Content.Load<Texture2D>(@"Textures\heartSprite");
             spriteSheet = Content.Load<Texture2D>(@"DungeonCrawl_ProjectUtumnoTileset");
+            link = Content.Load<Texture2D>(@"Textures\spritesheet");
 
             
-            hero = new Sprite(new Vector2(32, 32), spriteSheet, new Microsoft.Xna.Framework.Rectangle(288, 161, 32, 32), Vector2.Zero);
+            hero = new Sprite(new Vector2(32, 32), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
 
 
-            health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 32, 32), Vector2.Zero);
+            health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 196, 28), Vector2.Zero);
 
             rt = new RenderTarget2D(this.GraphicsDevice, 1024, 768);
         }
@@ -135,9 +137,27 @@ namespace TileTest
                     return true;
                 }
 
-                if (t != null && (items.Contains(t.TileIndex) || (t.Properties.Count > 0 && t.Properties["type"] == "item")))
+
+            }
+            return false;
+        }
+
+        public bool item(Layer layer, int x, int y)
+        {
+            Location loc = new Location(x, y);
+
+            Location i = layer.GetTileLocation(loc);
+            if (layer.IsValidTileLocation(i))
+            {
+                Tile d = layer.Tiles[i];
+
+                
+
+                if (d != null && (items.Contains(d.TileIndex) || (d.Properties.Count > 0 && d.Properties["type"] == "items")))
                 {
-                    score++;
+                    score += 100;
+                    return true;
+                   
                 }
 
             }
@@ -329,7 +349,7 @@ namespace TileTest
 
             spriteBatch.DrawString(
                     pericles14,
-                    "Score: 0" , scoreLocation, Color.White);
+                    "Score: " + score , scoreLocation, Color.White);
 
 
             spriteBatch.End();

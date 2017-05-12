@@ -5843,7 +5843,11 @@
         </Row>
         <Row>
           <Null Count="7" />
-          <Static Index="2924" BlendMode="Alpha" />
+          <Static Index="2924" BlendMode="Alpha">
+            <Properties>
+              <Property Key="type" Type="String"><![CDATA[items]]></Property>
+            </Properties>
+          </Static>
           <Null Count="43" />
           <Static Index="723" BlendMode="Alpha" />
           <Null Count="8" />
