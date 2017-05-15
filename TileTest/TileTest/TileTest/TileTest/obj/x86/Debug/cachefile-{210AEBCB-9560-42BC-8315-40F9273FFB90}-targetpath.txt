@@ -1,6 +1,7 @@
 Content\DungeonCrawl_ProjectUtumnoTileset.xnb
 Content\Textures\heartSprite.xnb
+Content\Textures\spritesheet.xnb
 Content\Map1.xnb
 Content\DemoMap.xnb
 Content\Fonts\Pericles14.xnb
-Content\Textures\spritesheet.xnb
+Content\DemoMap2.xnb

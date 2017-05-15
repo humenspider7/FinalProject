@@ -13,6 +13,7 @@ using xTile.Display;
 using xTile.Dimensions;
 using xTile.Tiles;
 using xTile.Layers;
+using System.Diagnostics;
 
 namespace TileTest
 {
@@ -24,13 +25,20 @@ namespace TileTest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        xTile.Map map;
+        //xTile.Map map;
         Texture2D spriteSheet;
         Texture2D heartSprite;
         Texture2D link;
 
         private Vector2 scoreLocation = new Vector2(800, 10);
         private Vector2 healthLocation = new Vector2(20, 10);
+
+        enum GameItems
+        {
+            CHEST = 2924,
+            POTION = 300,// ?????
+            STAIRS = 1001
+        }
 
         public int score = 0;
 
@@ -39,7 +47,11 @@ namespace TileTest
         XnaDisplayDevice m_xnaDisplayDevice;
         Sprite hero;
         Sprite health;
+        int healthNum = 6; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
         SpriteFont pericles14;
+
+        Dictionary<String, Map> maps;
+        String currentMap = "level1";
 
         List<int> wallTypes;
         List<int> items;
@@ -71,6 +83,7 @@ namespace TileTest
 
             items = new List<int>();
             items.Add(2924);//chest
+            items.Add(1001);//stairs
 
             wallTypes = new List<int>();
             wallTypes.Add(821);// 821 is a wall
@@ -95,10 +108,17 @@ namespace TileTest
 
             m_xnaDisplayDevice = new XnaDisplayDevice(Content, GraphicsDevice);
 
+            maps = new Dictionary<string, Map>();
+            maps.Add("level1", Content.Load<Map>("DemoMap"));
+            maps["level1"].LoadTileSheets(m_xnaDisplayDevice);
+
+            maps.Add("level2", Content.Load<Map>("DemoMap2"));
+            maps["level2"].LoadTileSheets(m_xnaDisplayDevice);
+
+            //Debug.Assert (!Object.ReferenceEquals(maps["level1"], maps["level2"]));
             //map = Content.Load<Map>("Map1");
             //map.LoadTileSheets(m_xnaDisplayDevice);
-            map = Content.Load<Map>("DemoMap");
-            map.LoadTileSheets(m_xnaDisplayDevice);
+
             pericles14 = Content.Load<SpriteFont>(@"Fonts\Pericles14");
             heartSprite = Content.Load<Texture2D>(@"Textures\heartSprite");
             spriteSheet = Content.Load<Texture2D>(@"DungeonCrawl_ProjectUtumnoTileset");
@@ -119,8 +139,11 @@ namespace TileTest
         /// </summary>
         protected override void UnloadContent()
         {
-            map.DisposeTileSheets(m_xnaDisplayDevice);
-            map = null;
+            foreach (var name in maps.Keys)
+            {
+                maps[name].DisposeTileSheets(m_xnaDisplayDevice);              
+            }
+            maps.Clear();
         }
 
         public bool isWall (Layer layer, int x, int y)
@@ -142,7 +165,7 @@ namespace TileTest
             return false;
         }
 
-        public bool item(Layer layer, int x, int y)
+        public Tuple<bool, Tile> isItem(Layer layer, int x, int y)
         {
             Location loc = new Location(x, y);
 
@@ -153,15 +176,14 @@ namespace TileTest
 
                 
 
-                if (d != null && (items.Contains(d.TileIndex) || (d.Properties.Count > 0 && d.Properties["type"] == "items")))
+                if (d != null && (items.Contains(d.TileIndex) || (d.Properties.Count > 0 && d.Properties.ContainsKey("type") && d.Properties["type"] == "items")))
                 {
-                    score += 100;
-                    return true;
+                    return new Tuple<bool, Tile>(true, d);
                    
                 }
 
             }
-            return false;
+            return new Tuple<bool, Tile>(false, null);
         }
         protected bool canMove (Sprite sprite, Layer layer, Vector2 direction)
         {
@@ -184,6 +206,17 @@ namespace TileTest
                 return true;
             }
             return false;
+        }
+
+        public void switchMap (String mapname)
+        {
+
+            currentMap = mapname;
+            hero.Location = new Vector2(32, 32);
+            hero.state = SpriteStates.IDLE;
+            hero.Velocity = Vector2.Zero;
+            m_viewPort.Location.X = 0;
+            m_viewPort.Location.Y = 0;
         }
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -232,28 +265,67 @@ namespace TileTest
             }
 
 
-            Layer layer = map.GetLayer("Ground");
+            Layer glayer = maps[currentMap].GetLayer("Ground");
+            Layer olayer = maps[currentMap].GetLayer("objects");
 
             float duration = 0.2f;
             if (kb.IsKeyDown(Keys.A))
             {
-                if (canMove(hero, layer, new Vector2(-32, 0)))
+                if (canMove(hero, glayer, new Vector2(-32, 0)))
                     hero.AnimateMove(hero.Location + new Vector2(-32, 0), duration);
             }
             else if (kb.IsKeyDown(Keys.D))
             {
-                if (canMove(hero, layer, new Vector2(32, 0)))
+                if (canMove(hero, glayer, new Vector2(32, 0)))
                     hero.AnimateMove(hero.Location + new Vector2(32, 0), duration);
             }
             else if (kb.IsKeyDown(Keys.W))
             {
-                if (canMove(hero, layer, new Vector2(0, -32)))
+                if (canMove(hero, glayer, new Vector2(0, -32)))
                     hero.AnimateMove(hero.Location + new Vector2(0, -32), duration);
             }
             else if (kb.IsKeyDown(Keys.S))
             {
-                if (canMove(hero, layer, new Vector2(0, 32)))
+                if (canMove(hero, glayer, new Vector2(0, 32)))
                     hero.AnimateMove(hero.Location + new Vector2(0, 32), duration);
+            }
+
+            Tuple<bool, Tile> item = isItem(olayer, (int)hero.Center.X, (int)hero.Center.Y);
+            
+            if (item.Item1)  // If it is an item
+            {
+                Tile tile = item.Item2;
+
+                GameItems type = (GameItems)tile.TileIndex;
+
+                switch (type)
+                {
+                    case GameItems.CHEST:
+
+                        if (!tile.Properties.ContainsKey("empty"))
+                            score += 100;
+
+                        tile.Properties["empty"] = true;
+                        tile.TileIndex = 0;
+
+                        
+
+                        break;
+
+                    case GameItems.POTION:
+
+                        if(healthNum < 6 && healthNum > 0 && score >=100)
+                        {
+                            healthNum += 1;
+                            score -= 100;
+                        }
+                        break;
+
+                    case GameItems.STAIRS:
+                        switchMap("level2");
+
+                        break;
+                }
             }
 
             Vector2 viewOffs = new Vector2(m_viewPort.Location.X, m_viewPort.Location.Y);
@@ -301,11 +373,11 @@ namespace TileTest
                 }
                 */
                 //Window.Title = (q == null ? "" : "" + q.Properties.Count);
-                Location q = layer.GetTileLocation(pointer);
-                if (layer.IsValidTileLocation(q))
+                Location q = glayer.GetTileLocation(pointer);
+                if (glayer.IsValidTileLocation(q))
                 {
-                    Tile pt = layer.Tiles[q.X, q.Y];
-                    Location loc = layer.ConvertLayerToMapLocation(q, new Size(m_viewPort.Width, m_viewPort.Height));
+                    Tile pt = glayer.Tiles[q.X, q.Y];
+                    Location loc = glayer.ConvertLayerToMapLocation(q, new Size(m_viewPort.Width, m_viewPort.Height));
 
                     Window.Title = (q == null ? "" : "" + q.X + " " + q.Y + " " + loc.X + " " + loc.Y + (pt.Properties.Count > 0 ? (String)pt.Properties["type"] : ""));
                 }
@@ -321,10 +393,10 @@ namespace TileTest
                 // Limit ability to view offscreen
                 m_viewPort.Location.X = Math.Max(0, m_viewPort.X);
             m_viewPort.Location.Y = Math.Max(0, m_viewPort.Y);
-            m_viewPort.Location.X = Math.Min(map.DisplayWidth - m_viewPort.Width, m_viewPort.X);
-            m_viewPort.Location.Y = Math.Min(map.DisplayHeight - m_viewPort.Height, m_viewPort.Y);
+            m_viewPort.Location.X = Math.Min(maps[currentMap].DisplayWidth - m_viewPort.Width, m_viewPort.X);
+            m_viewPort.Location.Y = Math.Min(maps[currentMap].DisplayHeight - m_viewPort.Height, m_viewPort.Y);
 
-            map.Update(gameTime.ElapsedGameTime.Milliseconds);
+            maps[currentMap].Update(gameTime.ElapsedGameTime.Milliseconds);
             hero.Update(gameTime);
 
             base.Update(gameTime);
@@ -340,7 +412,7 @@ namespace TileTest
 
             //GraphicsDevice.SetRenderTarget(rt);
             spriteBatch.Begin();
-            map.Draw(m_xnaDisplayDevice, m_viewPort, Location.Origin, false);
+            maps[currentMap].Draw(m_xnaDisplayDevice, m_viewPort, Location.Origin, false);
             hero.Draw(spriteBatch, m_viewPort);
             health.Draw(spriteBatch);
 
