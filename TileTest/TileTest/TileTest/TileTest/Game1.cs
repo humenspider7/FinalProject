@@ -37,7 +37,11 @@ namespace TileTest
         {
             CHEST = 2924,
             POTION = 300,// ?????
-            STAIRS = 1001
+            STAIRS = 1001,
+            LAVA1 = 881,
+            LAVA2 = 882,
+            LAVA3 = 883,
+            LAVA4 = 884,
         }
 
         public int score = 0;
@@ -84,13 +88,14 @@ namespace TileTest
             items = new List<int>();
             items.Add(2924);//chest
             items.Add(1001);//stairs
+            items.Add(881);//881 - 884 is lava
+            items.Add(882);
+            items.Add(883);
+            items.Add(884);
 
             wallTypes = new List<int>();
             wallTypes.Add(821);// 821 is a wall
-            wallTypes.Add(881);//881 - 884 is lava
-            wallTypes.Add(882);
-            wallTypes.Add(883);
-            wallTypes.Add(884);
+           
         }
 
         /// <summary>
@@ -322,8 +327,27 @@ namespace TileTest
                         break;
 
                     case GameItems.STAIRS:
-                        switchMap("level2");
+                        if (currentMap == "level1")
+                        {
+                            switchMap("level2");
+                        }
 
+                        break;
+
+                    case GameItems.LAVA1:
+                        healthNum-=1;
+                        break;
+
+                    case GameItems.LAVA2:
+                        healthNum -= 1;
+                        break;
+
+                    case GameItems.LAVA3:
+                        healthNum -= 1;
+                        break;
+
+                    case GameItems.LAVA4:
+                        healthNum -= 1;
                         break;
                 }
             }
@@ -417,7 +441,7 @@ namespace TileTest
             health.Draw(spriteBatch);
 
             spriteBatch.DrawString(
-                pericles14, "Health:", healthLocation, Color.White);
+                pericles14, "Health:" + healthNum, healthLocation, Color.White);
 
             spriteBatch.DrawString(
                     pericles14,
