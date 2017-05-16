@@ -24,6 +24,8 @@ namespace TileTest
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        bool isAlGay = true;
+        bool isAlStupid = true;
 
         //xTile.Map map;
         Texture2D spriteSheet;
