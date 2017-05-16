@@ -52,7 +52,7 @@ namespace TileTest
         Sprite hero;
         List<Sprite> enemies;
         Sprite health;
-        int healthNum = 6; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
+        int healthNum = 300; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
         SpriteFont pericles14;
 
         Dictionary<String, Map> maps;
@@ -142,7 +142,7 @@ namespace TileTest
             hero = new Sprite(new Vector2(32, 32), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
 
             enemies = new List<Sprite>();
-            enemies.Add(new Enemy(new Vector2(32, 32), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero, maps[currentMap], enemyWallTypes));
+            enemies.Add(new Enemy(new Vector2(128,128), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
 
             health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 196, 28), Vector2.Zero);
 
