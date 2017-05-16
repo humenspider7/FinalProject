@@ -50,6 +50,7 @@ namespace TileTest
 
         XnaDisplayDevice m_xnaDisplayDevice;
         Sprite hero;
+        List<Sprite> enemies;
         Sprite health;
         int healthNum = 6; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
         SpriteFont pericles14;
@@ -58,6 +59,7 @@ namespace TileTest
         String currentMap = "level1";
 
         List<int> wallTypes;
+        List<int> enemyWallTypes;
         List<int> items;
 
         RenderTarget2D rt;
@@ -85,6 +87,17 @@ namespace TileTest
 
             base.Initialize();
 
+
+           
+        }
+
+        /// <summary>
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// </summary>
+        protected override void LoadContent()
+        {
+
             items = new List<int>();
             items.Add(2924);//chest
             items.Add(1001);//stairs
@@ -95,15 +108,11 @@ namespace TileTest
 
             wallTypes = new List<int>();
             wallTypes.Add(821);// 821 is a wall
-           
-        }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected override void LoadContent()
-        {
+            enemyWallTypes = new List<int>();
+            enemyWallTypes.AddRange(wallTypes);
+            enemyWallTypes.AddRange(Enumerable.Range(881, 4));
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -132,6 +141,8 @@ namespace TileTest
             
             hero = new Sprite(new Vector2(32, 32), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
 
+            enemies = new List<Sprite>();
+            enemies.Add(new Enemy(new Vector2(32, 32), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero, maps[currentMap], enemyWallTypes));
 
             health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 196, 28), Vector2.Zero);
 
@@ -235,7 +246,10 @@ namespace TileTest
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
           
-
+            foreach (Enemy nme in enemies)
+            {
+                nme.Update(gameTime);
+            }
 
             // TODO: Add your update logic here
             /*
@@ -334,8 +348,24 @@ namespace TileTest
 
                         break;
 
+
+                }
+            }
+
+
+            item = isItem(glayer, (int)hero.Center.X, (int)hero.Center.Y);
+
+            if (item.Item1)  // If it is an item
+            {
+                Tile tile = item.Item2;
+
+                GameItems type = (GameItems)tile.TileIndex;
+
+                switch (type)
+                {
+                
                     case GameItems.LAVA1:
-                        healthNum-=1;
+                        healthNum -= 1;
                         break;
 
                     case GameItems.LAVA2:
@@ -438,6 +468,12 @@ namespace TileTest
             spriteBatch.Begin();
             maps[currentMap].Draw(m_xnaDisplayDevice, m_viewPort, Location.Origin, false);
             hero.Draw(spriteBatch, m_viewPort);
+
+            foreach (Enemy nme in enemies)
+            {
+                nme.Draw(spriteBatch, m_viewPort);
+            }
+
             health.Draw(spriteBatch);
 
             spriteBatch.DrawString(
@@ -446,6 +482,7 @@ namespace TileTest
             spriteBatch.DrawString(
                     pericles14,
                     "Score: " + score , scoreLocation, Color.White);
+
 
 
             spriteBatch.End();
