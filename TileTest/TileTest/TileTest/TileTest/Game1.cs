@@ -38,7 +38,7 @@ namespace TileTest
         enum GameItems
         {
             CHEST = 2924,
-            POTION = 300,// ?????
+            POTION = 723,
             STAIRS = 1001,
             LAVA1 = 881,
             LAVA2 = 882,
@@ -46,7 +46,7 @@ namespace TileTest
             LAVA4 = 884,
         }
 
-        public int score = 0;
+        public int score = 500;
 
         xTile.Dimensions.Rectangle m_viewPort;
 
@@ -54,7 +54,7 @@ namespace TileTest
         Sprite hero;
         List<Sprite> enemies;
         Sprite health;
-        int healthNum = 300; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
+        int healthNum = 1; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
         SpriteFont pericles14;
 
         Dictionary<String, Map> maps;
@@ -110,6 +110,7 @@ namespace TileTest
 
             wallTypes = new List<int>();
             wallTypes.Add(821);// 821 is a wall
+            
 
             enemyWallTypes = new List<int>();
             enemyWallTypes.AddRange(wallTypes);
@@ -128,7 +129,7 @@ namespace TileTest
             maps.Add("level1", Content.Load<Map>("DemoMap"));
             maps["level1"].LoadTileSheets(m_xnaDisplayDevice);
 
-            maps.Add("level2", Content.Load<Map>("DemoMap2"));
+            maps.Add("level2", Content.Load<Map>("Map1"));
             maps["level2"].LoadTileSheets(m_xnaDisplayDevice);
 
             //Debug.Assert (!Object.ReferenceEquals(maps["level1"], maps["level2"]));
@@ -144,7 +145,11 @@ namespace TileTest
             hero = new Sprite(new Vector2(32, 32), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
 
             enemies = new List<Sprite>();
-            enemies.Add(new Enemy(new Vector2(128,128), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
+            enemies.Add(new Enemy(new Vector2(128, 128), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
+            enemies.Add(new Enemy(new Vector2(320, 320), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
+            enemies.Add(new Enemy(new Vector2(256, 256), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
+            enemies.Add(new Enemy(new Vector2(480, 480), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
+            enemies.Add(new Enemy(new Vector2(992, 768), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
 
             health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 196, 28), Vector2.Zero);
 
@@ -334,12 +339,15 @@ namespace TileTest
                         break;
 
                     case GameItems.POTION:
-
-                        if(healthNum < 6 && healthNum > 0 && score >=100)
+                        // For potion, if you land on it, it disappears right after.
+                        if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty") && healthNum < 6 && healthNum > 0 && score >= 100)  //Pressing F to interact does not work.
                         {
-                            healthNum += 1;
                             score -= 100;
+                            healthNum += 1;
                         }
+                        tile.Properties["empty"] = true;
+                        tile.TileIndex = 0;
+                        
                         break;
 
                     case GameItems.STAIRS:
@@ -478,9 +486,11 @@ namespace TileTest
 
             health.Draw(spriteBatch);
 
-            spriteBatch.DrawString(
-                pericles14, "Health:" + healthNum, healthLocation, Color.White);
-
+            if (healthNum > 0 && healthNum <= 6)
+            {
+                spriteBatch.DrawString(
+                    pericles14, "Health:" + healthNum, healthLocation, Color.White);
+            }
             spriteBatch.DrawString(
                     pericles14,
                     "Score: " + score , scoreLocation, Color.White);
