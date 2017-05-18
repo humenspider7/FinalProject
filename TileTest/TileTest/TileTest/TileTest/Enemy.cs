@@ -35,7 +35,7 @@ namespace TileTest
             this.map = map;
             this.wallTypes = wallTypes;
             dir = EnemyDirection.DOWN;
-            rand = new Random(System.Environment.TickCount);
+            rand = Randnum.rand;
         }
 
         public bool isWall(Layer layer, int x, int y)
@@ -103,6 +103,17 @@ namespace TileTest
             }
 
             return true;
+        }
+
+        public void Draw (SpriteBatch sb, xTile.Dimensions.Rectangle m_viewPort, Map currentMap)
+        {
+            if (this.map == currentMap)
+                base.Draw(sb, m_viewPort);
+        }
+
+        public bool IsBoxColliding(Microsoft.Xna.Framework.Rectangle OtherBox, Map currentMap)
+        {
+            return this.map == currentMap && base.IsBoxColliding(OtherBox);
         }
 
         public override void Update(GameTime gameTime)

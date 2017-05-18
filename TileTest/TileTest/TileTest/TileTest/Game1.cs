@@ -145,15 +145,42 @@ namespace TileTest
             hero = new Sprite(new Vector2(32, 32), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
 
             enemies = new List<Sprite>();
-            enemies.Add(new Enemy(new Vector2(128, 128), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
-            enemies.Add(new Enemy(new Vector2(320, 320), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
-            enemies.Add(new Enemy(new Vector2(256, 256), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
-            enemies.Add(new Enemy(new Vector2(480, 480), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
-            enemies.Add(new Enemy(new Vector2(992, 768), spriteSheet, new Microsoft.Xna.Framework.Rectangle(383, 160, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
+
+            LoadMonsters();
 
             health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 196, 28), Vector2.Zero);
 
             rt = new RenderTarget2D(this.GraphicsDevice, 1024, 768);
+        }
+
+        protected void LoadMonsters ()
+        {
+            enemies.Clear();
+
+            Layer mlayer = maps[currentMap].GetLayer("Monsters");
+
+            Debug.Assert(mlayer != null, "YOU MUST ADD A Monsters LAYER TO THIS MAP.. Ugh.. noobs");
+
+            mlayer.Visible = false;
+
+            for (int x = 0; x < mlayer.LayerSize.Width; x++)
+            {
+                for (int y = 0; y < mlayer.LayerSize.Height; y++)
+                {
+                    Tile t = mlayer.Tiles[x, y];
+
+                    if (t != null)
+                    {
+                        // Found a monster!
+                        int mindex = t.TileIndex;
+                        int tiley = t.TileIndex / 64;
+                        int tilex = t.TileIndex % 64;
+                        // 64 tiles wide
+
+                        enemies.Add(new Enemy(new Vector2(x*32, y*32), spriteSheet, new Microsoft.Xna.Framework.Rectangle(tilex*32, tiley*32, 32, 32), Vector2.Zero, maps[currentMap], enemyWallTypes));
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -231,15 +258,16 @@ namespace TileTest
             return false;
         }
 
-        public void switchMap (String mapname)
+        public void switchMap (String mapname, Vector2 position)
         {
 
             currentMap = mapname;
-            hero.Location = new Vector2(32, 32);
+            hero.Location = position;
             hero.state = SpriteStates.IDLE;
             hero.Velocity = Vector2.Zero;
             m_viewPort.Location.X = 0;
             m_viewPort.Location.Y = 0;
+            LoadMonsters();
         }
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -351,9 +379,18 @@ namespace TileTest
                         break;
 
                     case GameItems.STAIRS:
+
+                        Vector2 destination = new Vector2(32, 32);
+                        if (tile.Properties.ContainsKey("jumpto"))
+                        {
+                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                            destination.X = parts[0] * 32;
+                            destination.Y = parts[1] * 32;
+                        }
+
                         if (currentMap == "level1")
                         {
-                            switchMap("level2");
+                            switchMap("level2", destination);
                         }
 
                         break;
@@ -481,7 +518,7 @@ namespace TileTest
 
             foreach (Enemy nme in enemies)
             {
-                nme.Draw(spriteBatch, m_viewPort);
+                nme.Draw(spriteBatch, m_viewPort, maps[currentMap]);
             }
 
             health.Draw(spriteBatch);

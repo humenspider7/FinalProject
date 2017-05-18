@@ -128,7 +128,7 @@ namespace TileTest
             }
         }
 
-        public bool IsBoxColliding(Rectangle OtherBox)
+        public virtual bool IsBoxColliding(Rectangle OtherBox)
         {
             return BoundingBoxRect.Intersects(OtherBox);
         }

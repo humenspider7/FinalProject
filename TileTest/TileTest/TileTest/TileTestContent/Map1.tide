@@ -935,6 +935,107 @@
       </TileArray>
       <Properties />
     </Layer>
+    <Layer Id="Monsters" Visible="True">
+      <Description><![CDATA[]]></Description>
+      <Dimensions LayerSize="30 x 25" TileSize="32 x 32" />
+      <TileArray>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="13" />
+          <TileSheet Ref="Tiles" />
+          <Static Index="511" BlendMode="Alpha" />
+          <Null Count="7" />
+          <Static Index="327" BlendMode="Alpha" />
+          <Null Count="8" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="9" />
+          <Static Index="332" BlendMode="Alpha" />
+          <Null Count="20" />
+        </Row>
+        <Row>
+          <Null Count="28" />
+          <Static Index="511" BlendMode="Alpha" />
+          <Null Count="1" />
+        </Row>
+        <Row>
+          <Null Count="5" />
+          <Static Index="511" BlendMode="Alpha" />
+          <Null Count="24" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="18" />
+          <Static Index="609" BlendMode="Alpha" />
+          <Null Count="11" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="7" />
+          <Static Index="327" BlendMode="Alpha" />
+          <Null Count="22" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="2" />
+          <Static Index="609" BlendMode="Alpha" />
+          <Null Count="27" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+        <Row>
+          <Null Count="14" />
+          <Static Index="332" BlendMode="Alpha" />
+          <Null Count="15" />
+        </Row>
+        <Row>
+          <Null Count="30" />
+        </Row>
+      </TileArray>
+      <Properties />
+    </Layer>
   </Layers>
   <Properties />
 </Map>
