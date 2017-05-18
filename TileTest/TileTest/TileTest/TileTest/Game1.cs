@@ -44,6 +44,7 @@ namespace TileTest
             LAVA2 = 882,
             LAVA3 = 883,
             LAVA4 = 884,
+            PORTAL = 666
         }
 
         public int score = 500;
@@ -58,6 +59,8 @@ namespace TileTest
         SpriteFont pericles14;
 
         Dictionary<String, Map> maps;
+        Dictionary<String, bool> mapsMonstersLoaded;
+
         String currentMap = "level1";
 
         List<int> wallTypes;
@@ -125,6 +128,7 @@ namespace TileTest
 
             m_xnaDisplayDevice = new XnaDisplayDevice(Content, GraphicsDevice);
 
+            mapsMonstersLoaded = new Dictionary<string, bool>();
             maps = new Dictionary<string, Map>();
             maps.Add("level1", Content.Load<Map>("DemoMap"));
             maps["level1"].LoadTileSheets(m_xnaDisplayDevice);
@@ -267,7 +271,12 @@ namespace TileTest
             hero.Velocity = Vector2.Zero;
             m_viewPort.Location.X = 0;
             m_viewPort.Location.Y = 0;
-            LoadMonsters();
+
+            if (!mapsMonstersLoaded.ContainsKey(currentMap))
+            {
+                LoadMonsters();
+                mapsMonstersLoaded[currentMap] = true;
+            }
         }
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -378,6 +387,7 @@ namespace TileTest
                         
                         break;
 
+                    case GameItems.PORTAL:
                     case GameItems.STAIRS:
 
                         Vector2 destination = new Vector2(32, 32);
@@ -388,10 +398,15 @@ namespace TileTest
                             destination.Y = parts[1] * 32;
                         }
 
-                        if (currentMap == "level1")
+                        if (tile.Properties.ContainsKey("map"))
                         {
-                            switchMap("level2", destination);
+                            switchMap(tile.Properties["map"], destination);
                         }
+                        else
+                        {
+                            switchMap(currentMap, destination);
+                        }
+
 
                         break;
 
