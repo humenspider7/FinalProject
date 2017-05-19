@@ -365,12 +365,12 @@ namespace TileTest
                 {
                     case GameItems.CHEST:
 
-                        if (!tile.Properties.ContainsKey("empty"))
+                        if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty"))
+                        {
                             score += 100;
-
-                        tile.Properties["empty"] = true;
-                        tile.TileIndex = 0;
-
+                            tile.Properties["empty"] = true;
+                            tile.TileIndex = 2925;
+                        }
                         
 
                         break;
@@ -382,10 +382,8 @@ namespace TileTest
                             score -= 100;
                             healthNum += 1;
                             tile.Properties["empty"] = true;
-                            tile.TileIndex = 0;
+                            tile.TileIndex = 729;
                         }
-                        //tile.Properties["empty"] = true;
-                        //tile.TileIndex = 0;
                         
                         break;
 
