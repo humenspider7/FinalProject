@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Output>
-      <Time>2017-05-18T12:14:10.5750787-04:00</Time>
+      <Time>2017-05-19T12:15:18.2753331-04:00</Time>
     </Item>
     <Item>
       <Source>Textures\heartSprite.png</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Textures\heartSprite.xnb</Output>
-      <Time>2017-05-18T12:14:10.5800826-04:00</Time>
+      <Time>2017-05-19T12:15:18.2813451-04:00</Time>
     </Item>
     <Item>
       <Source>Textures\spritesheet.png</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Textures\spritesheet.xnb</Output>
-      <Time>2017-05-18T12:14:10.5810833-04:00</Time>
+      <Time>2017-05-19T12:15:18.2813451-04:00</Time>
     </Item>
     <Item>
       <Source>Map1.tide</Source>
@@ -35,10 +35,10 @@
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Map1.xnb</Output>
-      <Time>2017-05-18T12:54:25.9111477-04:00</Time>
+      <Time>2017-05-19T12:15:18.2773551-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
-        <Value>2017-05-18T12:14:10.5750787-04:00</Value>
+        <Value>2017-05-19T12:15:18.2753331-04:00</Value>
       </Dependency>
       <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
@@ -49,10 +49,10 @@
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DemoMap.xnb</Output>
-      <Time>2017-05-18T13:09:12.2795617-04:00</Time>
+      <Time>2017-05-19T12:15:18.2623242-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
-        <Value>2017-05-18T12:14:10.5750787-04:00</Value>
+        <Value>2017-05-19T12:15:18.2753331-04:00</Value>
       </Dependency>
       <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
@@ -63,10 +63,10 @@
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DemoMap2.xnb</Output>
-      <Time>2017-05-18T12:14:10.5640716-04:00</Time>
+      <Time>2017-05-19T12:15:18.2643385-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
-        <Value>2017-05-18T12:14:10.5750787-04:00</Value>
+        <Value>2017-05-19T12:15:18.2753331-04:00</Value>
       </Dependency>
       <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
@@ -77,7 +77,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Fonts\Pericles14.xnb</Output>
-      <Time>2017-05-18T12:14:10.5760797-04:00</Time>
+      <Time>2017-05-19T12:15:18.2763338-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -94,7 +94,7 @@
     <Assemblies>
       <Assembly>
         <Key>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\xTilePipeline\bin\x86\Debug\xTile.Pipeline.dll</Key>
-        <Value>2017-05-18T13:09:15.787881-04:00</Value>
+        <Value>2017-05-19T12:17:40.6140306-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>

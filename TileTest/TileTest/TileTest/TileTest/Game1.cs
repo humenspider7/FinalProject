@@ -376,14 +376,16 @@ namespace TileTest
                         break;
 
                     case GameItems.POTION:
-                        // For potion, if you land on it, it disappears right after.
+                        // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
                         if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty") && healthNum < 6 && healthNum > 0 && score >= 100)  //Pressing F to interact does not work.
                         {
                             score -= 100;
                             healthNum += 1;
+                            tile.Properties["empty"] = true;
+                            tile.TileIndex = 0;
                         }
-                        tile.Properties["empty"] = true;
-                        tile.TileIndex = 0;
+                        //tile.Properties["empty"] = true;
+                        //tile.TileIndex = 0;
                         
                         break;
 

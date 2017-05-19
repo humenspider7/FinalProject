@@ -4,7 +4,7 @@
   <TileSheets>
     <TileSheet Id="untitled tile sheet">
       <Description><![CDATA[]]></Description>
-      <ImageSource><![CDATA[GitHub\FinalProject\TileTest\TileTest\TileTest\TileTestContent\DungeonCrawl_ProjectUtumnoTileset.png]]></ImageSource>
+      <ImageSource><![CDATA[DungeonCrawl_ProjectUtumnoTileset.png]]></ImageSource>
       <Alignment SheetSize="64 x 48" TileSize="32 x 32" Margin="0 x 0" Spacing="0 x 0" />
       <Properties />
     </TileSheet>
