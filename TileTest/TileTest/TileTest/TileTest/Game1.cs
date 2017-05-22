@@ -44,7 +44,9 @@ namespace TileTest
             LAVA2 = 882,
             LAVA3 = 883,
             LAVA4 = 884,
-            PORTAL = 666
+            PORTAL = 666,
+            MAZE_ENTER1 = 913,
+            MAZE_ENTER2 = 986,
         }
 
         public int score = 500;
@@ -61,7 +63,7 @@ namespace TileTest
         Dictionary<String, Map> maps;
         Dictionary<String, bool> mapsMonstersLoaded;
 
-        String currentMap = "level1";
+        String currentMap = "Spawn";
 
         List<int> wallTypes;
         List<int> enemyWallTypes;
@@ -130,6 +132,10 @@ namespace TileTest
 
             mapsMonstersLoaded = new Dictionary<string, bool>();
             maps = new Dictionary<string, Map>();
+
+            maps.Add("Spawn", Content.Load<Map>("SpawnRoom"));
+            maps["Spawn"].LoadTileSheets(m_xnaDisplayDevice);
+
             maps.Add("level1", Content.Load<Map>("DemoMap"));
             maps["level1"].LoadTileSheets(m_xnaDisplayDevice);
 
@@ -146,7 +152,7 @@ namespace TileTest
             link = Content.Load<Texture2D>(@"Textures\spritesheet");
 
             
-            hero = new Sprite(new Vector2(32, 32), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
+            hero = new Sprite(new Vector2(480, 384), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
 
             enemies = new List<Sprite>();
 
@@ -262,7 +268,7 @@ namespace TileTest
             return false;
         }
 
-        public void switchMap (String mapname, Vector2 position)
+        public void switchMap (String mapname, Vector2 position, int healthNum)
         {
 
             currentMap = mapname;
@@ -276,6 +282,12 @@ namespace TileTest
             {
                 LoadMonsters();
                 mapsMonstersLoaded[currentMap] = true;
+            }
+
+            if (healthNum <= 0)
+            {
+                switchMap("Spawn",480,384, 6);
+                
             }
         }
         /// <summary>
@@ -400,17 +412,59 @@ namespace TileTest
 
                         if (tile.Properties.ContainsKey("map"))
                         {
-                            switchMap(tile.Properties["map"], destination);
+                            switchMap(tile.Properties["map"], destination, 6);
                         }
                         else
                         {
-                            switchMap(currentMap, destination);
+                            switchMap(currentMap, destination, 6);
                         }
 
 
                         break;
 
+                    case GameItems.MAZE_ENTER1:
 
+                        Vector2 dest = new Vector2(32, 32);
+                        if (tile.Properties.ContainsKey("jumpto"))
+                        {
+                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                            dest.X = parts[0] * 32;
+                            dest.Y = parts[1] * 32;
+                        }
+
+                        if (tile.Properties.ContainsKey("map"))
+                        {
+                            switchMap(tile.Properties["map"], dest, 6);
+                        }
+                        else
+                        {
+                            switchMap(currentMap, dest, 6);
+                        }
+
+                        break;
+
+                    case GameItems.MAZE_ENTER2:
+
+                        Vector2 dst = new Vector2(32, 32);
+                        if (tile.Properties.ContainsKey("jumpto"))
+                        {
+                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                            dst.X = parts[0] * 32;
+                            dst.Y = parts[1] * 32;
+                        }
+
+                        if (tile.Properties.ContainsKey("map"))
+                        {
+                            switchMap(tile.Properties["map"], dst, 6);
+                        }
+                        else
+                        {
+                            switchMap(currentMap, dst, 6);
+                        }
+
+                        break;
+
+                        
                 }
             }
 

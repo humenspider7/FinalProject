@@ -23,3 +23,4 @@ C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTes
 C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Textures\heartSprite.xnb
 C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Textures\spritesheet.xnb
 C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DemoMap2.xnb
+C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\SpawnRoom.xnb
