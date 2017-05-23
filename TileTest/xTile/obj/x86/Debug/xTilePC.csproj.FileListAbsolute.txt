@@ -3,3 +3,4 @@ C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\xTile\bin\x86\Debug\xTile
 C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\xTile\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\xTile\obj\x86\Debug\xTile.dll
 C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\xTile\obj\x86\Debug\xTile.pdb
+C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\xTile\obj\x86\Debug\xTilePC.csprojResolveAssemblyReference.cache

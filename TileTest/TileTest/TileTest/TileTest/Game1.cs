@@ -283,12 +283,6 @@ namespace TileTest
                 LoadMonsters();
                 mapsMonstersLoaded[currentMap] = true;
             }
-
-            if (healthNum <= 0)
-            {
-                switchMap("Spawn",480,384, 6);
-                
-            }
         }
         /// <summary>
         /// Allows the game to run logic such as updating the world,
