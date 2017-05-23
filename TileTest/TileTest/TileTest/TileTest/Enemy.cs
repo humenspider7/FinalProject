@@ -15,7 +15,7 @@ namespace TileTest
 {
     public enum EnemyDirection { UP, DOWN, LEFT, RIGHT };
 
-    class Enemy : Sprite
+    class Enemy : Sprite 
     {
         private Map map;
         private List<int> wallTypes;

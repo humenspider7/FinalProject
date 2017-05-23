@@ -510,7 +510,12 @@
           <Static Index="821" BlendMode="Alpha" />
           <Static Index="821" BlendMode="Alpha" />
           <Static Index="821" BlendMode="Alpha" />
-          <Static Index="1001" BlendMode="Alpha" />
+          <Static Index="1001" BlendMode="Alpha">
+            <Properties>
+              <Property Key="jumpto" Type="String"><![CDATA[1,1]]></Property>
+              <Property Key="map" Type="String"><![CDATA[level2]]></Property>
+            </Properties>
+          </Static>
           <Static Index="821" BlendMode="Alpha">
             <Properties>
               <Property Key="type" Type="String"><![CDATA[wall]]></Property>
@@ -5838,7 +5843,12 @@
         </Row>
         <Row>
           <Null Count="58" />
-          <Static Index="1001" BlendMode="Alpha" />
+          <Static Index="1001" BlendMode="Alpha">
+            <Properties>
+              <Property Key="jumpto" Type="String"><![CDATA[1,1]]></Property>
+              <Property Key="map" Type="String"><![CDATA[level2]]></Property>
+            </Properties>
+          </Static>
           <Null Count="1" />
         </Row>
         <Row>

@@ -26,6 +26,28 @@ namespace TileTest
         SpriteBatch spriteBatch;
         bool isAlGay = true;
         bool isAlStupid = true;
+     /*
+       TO DO LIST
+
+            1. Enable spawn room.  Spawn Room is enabled.
+                a. Enable teleportation to corresponding dungeon from spawn room.
+                b. Add decorations to each spawn room.
+            2. Enable damage.
+                a. Press space in front of enemies to damage them and reduce enemy health value
+                b. Touch an enemy to lose -1 health value.
+            3. Fix health sprite to reflect healthNum
+                a. Make it so if you take damage, the amount of hearts decrease.
+                b. If you gain health, you gain a heart sprite.
+            4. Enable game states.
+                a. Playing, title screen, game over.+
+      */
+
+
+
+
+
+
+
 
         //xTile.Map map;
         Texture2D spriteSheet;
@@ -45,7 +67,7 @@ namespace TileTest
             LAVA3 = 883,
             LAVA4 = 884,
             PORTAL = 666,
-            MAZE_ENTER1 = 913,
+            MAZE_ENTER1 = 981,
             MAZE_ENTER2 = 986,
         }
 
@@ -56,6 +78,7 @@ namespace TileTest
         XnaDisplayDevice m_xnaDisplayDevice;
         Sprite hero;
         List<Sprite> enemies;
+        Sprite mouse;
         Sprite health;
         int healthNum = 1; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
         SpriteFont pericles14;
@@ -104,6 +127,7 @@ namespace TileTest
         /// </summary>
         protected override void LoadContent()
         {
+            MouseState ms = new MouseState();
 
             items = new List<int>();
             items.Add(2924);//chest
@@ -160,6 +184,8 @@ namespace TileTest
 
             health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 196, 28), Vector2.Zero);
 
+            mouse = new Sprite(new Vector2(ms.X, ms.Y), spriteSheet, new Microsoft.Xna.Framework.Rectangle(32, 0, 11, 11), Vector2.Zero);
+
             rt = new RenderTarget2D(this.GraphicsDevice, 1024, 768);
         }
 
@@ -215,7 +241,7 @@ namespace TileTest
             {
                 Tile t = layer.Tiles[q];
 
-                if (t != null && (wallTypes.Contains(t.TileIndex) || (t.Properties.Count > 0 && t.Properties["type"] == "wall")))  // t.TileIndex == 822 // 813 or 822
+                if (t != null && (wallTypes.Contains(t.TileIndex) || (t.Properties.Count > 0 && t.Properties.ContainsKey("type") && t.Properties["type"] == "wall")))  // t.TileIndex == 822 // 813 or 822
                 {
                     return true;
                 }
@@ -268,7 +294,7 @@ namespace TileTest
             return false;
         }
 
-        public void switchMap (String mapname, Vector2 position, int healthNum)
+        public void switchMap (String mapname, Vector2 position)
         {
 
             currentMap = mapname;
@@ -406,11 +432,11 @@ namespace TileTest
 
                         if (tile.Properties.ContainsKey("map"))
                         {
-                            switchMap(tile.Properties["map"], destination, 6);
+                            switchMap(tile.Properties["map"], destination);
                         }
                         else
                         {
-                            switchMap(currentMap, destination, 6);
+                            switchMap(currentMap, destination);
                         }
 
 
@@ -428,11 +454,11 @@ namespace TileTest
 
                         if (tile.Properties.ContainsKey("map"))
                         {
-                            switchMap(tile.Properties["map"], dest, 6);
+                            switchMap(tile.Properties["map"], dest);
                         }
                         else
                         {
-                            switchMap(currentMap, dest, 6);
+                            switchMap(currentMap, dest);
                         }
 
                         break;
@@ -449,11 +475,11 @@ namespace TileTest
 
                         if (tile.Properties.ContainsKey("map"))
                         {
-                            switchMap(tile.Properties["map"], dst, 6);
+                            switchMap(tile.Properties["map"], dst);
                         }
                         else
                         {
-                            switchMap(currentMap, dst, 6);
+                            switchMap(currentMap, dst);
                         }
 
                         break;
@@ -595,7 +621,7 @@ namespace TileTest
                     pericles14,
                     "Score: " + score , scoreLocation, Color.White);
 
-
+            mouse.Draw(spriteBatch);
 
             spriteBatch.End();
 

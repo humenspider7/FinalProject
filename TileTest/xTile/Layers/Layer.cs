@@ -162,8 +162,8 @@ namespace xTile.Layers
             Size layerDisplaySize = DisplaySize;
 
             return new Location(
-                (layerDisplayLocation.X * (mapDisplaySize.Width - viewportSize.Width)) / (layerDisplaySize.Width - viewportSize.Width),
-                (layerDisplayLocation.Y * (mapDisplaySize.Height - viewportSize.Height)) / (layerDisplaySize.Height - viewportSize.Height));
+                (layerDisplayLocation.X * (mapDisplaySize.Width - viewportSize.Width)) / (layerDisplaySize.Width - viewportSize.Width + 1),
+                (layerDisplayLocation.Y * (mapDisplaySize.Height - viewportSize.Height)) / (layerDisplaySize.Height - viewportSize.Height + 1));
         }
 
         /// <summary>
