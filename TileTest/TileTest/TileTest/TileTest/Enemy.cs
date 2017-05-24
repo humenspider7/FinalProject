@@ -23,6 +23,7 @@ namespace TileTest
         private Random rand;
         private bool switchDirections = false;
         private float duration = 0.4f;
+        private float waitTimer = 0;
 
         public Enemy(
             Vector2 location,
@@ -38,6 +39,11 @@ namespace TileTest
             rand = Randnum.rand;
         }
 
+        public Map Map
+        {
+            get { return this.map; }
+        }
+
         public bool isWall(Layer layer, int x, int y)
         {
             Location loc = new Location(x, y);
@@ -47,7 +53,7 @@ namespace TileTest
             {
                 Tile t = layer.Tiles[q];
 
-                if (t != null && (wallTypes.Contains(t.TileIndex) || (t.Properties.Count > 0 && t.Properties["type"] == "wall")))  // t.TileIndex == 822 // 813 or 822
+                if (t != null && (wallTypes.Contains(t.TileIndex) || (t.Properties.Count > 0 && t.Properties.ContainsKey("type") &&  t.Properties["type"] == "wall")))  // t.TileIndex == 822 // 813 or 822
                 {
                     return true;
                 }
@@ -105,6 +111,11 @@ namespace TileTest
             return true;
         }
 
+        public void Wait (float duration)
+        {
+            waitTimer = duration;
+        }
+
         public void Draw (SpriteBatch sb, xTile.Dimensions.Rectangle m_viewPort, Map currentMap)
         {
             if (this.map == currentMap)
@@ -122,7 +133,9 @@ namespace TileTest
 
             int dirChangeProb = 70;
 
-            if (state == SpriteStates.IDLE)
+            waitTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (state == SpriteStates.IDLE && waitTimer <= 0f)
             {
                 int randNum = rand.Next(0, 100);
                 switch (dir)

@@ -40,6 +40,10 @@ namespace TileTest
                 b. If you gain health, you gain a heart sprite.
             4. Enable game states.
                 a. Playing, title screen, game over.+
+
+            5. Make a boss fight. Final boss.
+                a. Make a bool for each dungeon.  isDungeon1Complete = false; For every dungeon, it starts false.  When finished it will go true.  If all 4 bool values
+                = true, then a secret dungeon will appear with a final boss.
       */
 
 
@@ -62,16 +66,12 @@ namespace TileTest
             CHEST = 2924,
             POTION = 723,
             STAIRS = 1001,
-            LAVA1 = 881,
-            LAVA2 = 882,
-            LAVA3 = 883,
-            LAVA4 = 884,
             PORTAL = 666,
             MAZE_ENTER1 = 981,
             MAZE_ENTER2 = 986,
         }
 
-        public int score = 500;
+        public int score = 0;
 
         xTile.Dimensions.Rectangle m_viewPort;
 
@@ -80,7 +80,7 @@ namespace TileTest
         List<Sprite> enemies;
         Sprite mouse;
         Sprite health;
-        int healthNum = 1; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
+        int healthNum = 6; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
         SpriteFont pericles14;
 
         Dictionary<String, Map> maps;
@@ -92,6 +92,10 @@ namespace TileTest
         List<int> enemyWallTypes;
         List<int> items;
 
+        enum Directions {  STATIONARY, LEFT, RIGHT, UP, DOWN }
+
+        Directions lastDirection = Directions.STATIONARY;
+
         RenderTarget2D rt;
 
         public Game1()
@@ -101,7 +105,7 @@ namespace TileTest
             graphics.PreferredBackBufferWidth = 960;//960
             graphics.PreferredBackBufferHeight = 540;//540
             graphics.ApplyChanges();
-            this.IsMouseVisible = true;
+            //this.IsMouseVisible = true;
             Content.RootDirectory = "Content";
         }
 
@@ -132,14 +136,14 @@ namespace TileTest
             items = new List<int>();
             items.Add(2924);//chest
             items.Add(1001);//stairs
+            
+
+            wallTypes = new List<int>();
+            wallTypes.Add(821);// 821 is a wall
             items.Add(881);//881 - 884 is lava
             items.Add(882);
             items.Add(883);
             items.Add(884);
-
-            wallTypes = new List<int>();
-            wallTypes.Add(821);// 821 is a wall
-            
 
             enemyWallTypes = new List<int>();
             enemyWallTypes.AddRange(wallTypes);
@@ -191,7 +195,7 @@ namespace TileTest
 
         protected void LoadMonsters ()
         {
-            enemies.Clear();
+            //enemies.Clear();
 
             Layer mlayer = maps[currentMap].GetLayer("Monsters");
 
@@ -321,11 +325,11 @@ namespace TileTest
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            MouseState ms = Mouse.GetState();
+            mouse.Location = new Vector2(ms.X - mouse.BoundingBoxRect.Width, ms.Y);
           
-            foreach (Enemy nme in enemies)
-            {
-                nme.Update(gameTime);
-            }
+
 
             // TODO: Add your update logic here
             /*
@@ -360,30 +364,92 @@ namespace TileTest
             }
 
 
+
             Layer glayer = maps[currentMap].GetLayer("Ground");
             Layer olayer = maps[currentMap].GetLayer("objects");
 
+            foreach (Enemy nme in enemies)
+            {
+                if (hero.IsBoxColliding(nme.BoundingBoxRect) && maps[currentMap] == nme.Map && hero.state == SpriteStates.IDLE)
+                {
+                    nme.Wait(1.0f);  // Make enemy wait 1.0 seconds before moving again
+                    healthNum--;
+                    if (lastDirection == Directions.STATIONARY)
+                    {
+                        if (canMove(hero, glayer, new Vector2(-64, 0)))
+                            hero.AnimateMove(hero.Location + new Vector2(-64, 0), 0.2f);
+                        else if (canMove(hero, glayer, new Vector2(64, 0)))
+                            hero.AnimateMove(hero.Location + new Vector2(64, 0), 0.2f);
+                        else if (canMove(hero, glayer, new Vector2(0, -64)))
+                            hero.AnimateMove(hero.Location + new Vector2(0, -64), 0.2f);
+                        else if (canMove(hero, glayer, new Vector2(0, 64)))
+                            hero.AnimateMove(hero.Location + new Vector2(0, 64), 0.2f);
+                    }
+                    else
+                    {
+                        switch (lastDirection)
+                        {
+                            case Directions.LEFT:
+                                if (canMove(hero, glayer, new Vector2(64, 0)))
+                                    hero.AnimateMove(hero.Location + new Vector2(64, 0), 0.2f);
+                                break;
+                            case Directions.RIGHT:
+                                if (canMove(hero, glayer, new Vector2(-64, 0)))
+                                    hero.AnimateMove(hero.Location + new Vector2(-64, 0), 0.2f);
+                                break;
+                            case Directions.UP:
+                                if (canMove(hero, glayer, new Vector2(0, 64)))
+                                    hero.AnimateMove(hero.Location + new Vector2(0, 64), 0.2f);
+                                break;
+                            case Directions.DOWN:
+                                if (canMove(hero, glayer, new Vector2(0, -64)))
+                                    hero.AnimateMove(hero.Location + new Vector2(0, -64), 0.2f);
+                                break;
+                        }
+                    }
+                }
+                nme.Update(gameTime);
+            }
+
             float duration = 0.2f;
-            if (kb.IsKeyDown(Keys.A))
+            if (hero.state == SpriteStates.IDLE)
             {
-                if (canMove(hero, glayer, new Vector2(-32, 0)))
-                    hero.AnimateMove(hero.Location + new Vector2(-32, 0), duration);
+                if (kb.IsKeyDown(Keys.A))
+                {
+                    if (canMove(hero, glayer, new Vector2(-32, 0)))
+                    {
+                        hero.AnimateMove(hero.Location + new Vector2(-32, 0), duration);
+                        lastDirection = Directions.LEFT;
+                    }
+                }
+                else if (kb.IsKeyDown(Keys.D))
+                {
+                    if (canMove(hero, glayer, new Vector2(32, 0)))
+                    { 
+                        hero.AnimateMove(hero.Location + new Vector2(32, 0), duration);
+                        lastDirection = Directions.RIGHT;
+                    }
+
+                }
+                else if (kb.IsKeyDown(Keys.W))
+                {
+                    if (canMove(hero, glayer, new Vector2(0, -32)))
+                    {
+                        hero.AnimateMove(hero.Location + new Vector2(0, -32), duration);
+                        lastDirection = Directions.UP;
+                    }
+                }
+                else if (kb.IsKeyDown(Keys.S))
+                {
+                    if (canMove(hero, glayer, new Vector2(0, 32)))
+                    {
+                        hero.AnimateMove(hero.Location + new Vector2(0, 32), duration);
+                        lastDirection = Directions.DOWN;
+                    }
+                }
             }
-            else if (kb.IsKeyDown(Keys.D))
-            {
-                if (canMove(hero, glayer, new Vector2(32, 0)))
-                    hero.AnimateMove(hero.Location + new Vector2(32, 0), duration);
-            }
-            else if (kb.IsKeyDown(Keys.W))
-            {
-                if (canMove(hero, glayer, new Vector2(0, -32)))
-                    hero.AnimateMove(hero.Location + new Vector2(0, -32), duration);
-            }
-            else if (kb.IsKeyDown(Keys.S))
-            {
-                if (canMove(hero, glayer, new Vector2(0, 32)))
-                    hero.AnimateMove(hero.Location + new Vector2(0, 32), duration);
-            }
+
+            
 
             Tuple<bool, Tile> item = isItem(olayer, (int)hero.Center.X, (int)hero.Center.Y);
             
@@ -497,25 +563,7 @@ namespace TileTest
 
                 GameItems type = (GameItems)tile.TileIndex;
 
-                switch (type)
-                {
                 
-                    case GameItems.LAVA1:
-                        healthNum -= 1;
-                        break;
-
-                    case GameItems.LAVA2:
-                        healthNum -= 1;
-                        break;
-
-                    case GameItems.LAVA3:
-                        healthNum -= 1;
-                        break;
-
-                    case GameItems.LAVA4:
-                        healthNum -= 1;
-                        break;
-                }
             }
 
             Vector2 viewOffs = new Vector2(m_viewPort.Location.X, m_viewPort.Location.Y);
@@ -550,7 +598,7 @@ namespace TileTest
 
             //Tile p = layer.PickTile(new Location(10, 10), new Size(m_viewPort.Width,m_viewPort.Height));
 
-            MouseState ms = Mouse.GetState();
+
             Location pointer = new Location(ms.X + m_viewPort.X, ms.Y + m_viewPort.Y);
 
             if (ms.LeftButton == ButtonState.Pressed)
