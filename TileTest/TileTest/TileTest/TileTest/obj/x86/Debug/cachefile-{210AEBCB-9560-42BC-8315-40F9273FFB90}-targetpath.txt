@@ -5,4 +5,6 @@ Content\Map1.xnb
 Content\DemoMap.xnb
 Content\DemoMap2.xnb
 Content\SpawnRoom.xnb
+Content\DesertRoom.xnb
+Content\Water Level.xnb
 Content\Fonts\Pericles14.xnb

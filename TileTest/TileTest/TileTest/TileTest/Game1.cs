@@ -66,9 +66,9 @@ namespace TileTest
             CHEST = 2924,
             POTION = 723,
             STAIRS = 1001,
-            PORTAL = 666,
-            MAZE_ENTER1 = 981,
-            MAZE_ENTER2 = 986,
+            PORTAL = 989,
+            MAZE_ENTER = 981,
+            DESERT_ENTER = 975,
         }
 
         public int score = 0;
@@ -140,10 +140,13 @@ namespace TileTest
 
             wallTypes = new List<int>();
             wallTypes.Add(821);// 821 is a wall
-            items.Add(881);//881 - 884 is lava
-            items.Add(882);
-            items.Add(883);
-            items.Add(884);
+            wallTypes.Add(881);//881 - 884 is lava
+            wallTypes.Add(882);
+            wallTypes.Add(883);
+            wallTypes.Add(884);
+            wallTypes.Add(1097);//water level wall
+            wallTypes.AddRange(Enumerable.Range(904, 9));
+            wallTypes.AddRange(Enumerable.Range(854, 7));
 
             enemyWallTypes = new List<int>();
             enemyWallTypes.AddRange(wallTypes);
@@ -164,11 +167,17 @@ namespace TileTest
             maps.Add("Spawn", Content.Load<Map>("SpawnRoom"));
             maps["Spawn"].LoadTileSheets(m_xnaDisplayDevice);
 
-            maps.Add("level1", Content.Load<Map>("DemoMap"));
-            maps["level1"].LoadTileSheets(m_xnaDisplayDevice);
+            maps.Add("maze", Content.Load<Map>("DemoMap"));
+            maps["maze"].LoadTileSheets(m_xnaDisplayDevice);
 
             maps.Add("level2", Content.Load<Map>("Map1"));
             maps["level2"].LoadTileSheets(m_xnaDisplayDevice);
+
+            maps.Add("water", Content.Load<Map>("Water Level"));
+            maps["water"].LoadTileSheets(m_xnaDisplayDevice);
+
+            maps.Add("desert", Content.Load<Map>("DesertRoom"));
+            maps["desert"].LoadTileSheets(m_xnaDisplayDevice);
 
             //Debug.Assert (!Object.ReferenceEquals(maps["level1"], maps["level2"]));
             //map = Content.Load<Map>("Map1");
@@ -486,6 +495,23 @@ namespace TileTest
                         break;
 
                     case GameItems.PORTAL:
+                        Vector2 dstination = new Vector2(32, 32);
+                        if (tile.Properties.ContainsKey("jumpto"))
+                        {
+                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                            dstination.X = parts[0] * 32;
+                            dstination.Y = parts[1] * 32;
+                        }
+
+                        if (tile.Properties.ContainsKey("map"))
+                        {
+                            switchMap(tile.Properties["map"], dstination);
+                        }
+                        else
+                        {
+                            switchMap(currentMap, dstination);
+                        }
+                        break;
                     case GameItems.STAIRS:
 
                         Vector2 destination = new Vector2(32, 32);
@@ -508,7 +534,7 @@ namespace TileTest
 
                         break;
 
-                    case GameItems.MAZE_ENTER1:
+                    case GameItems.MAZE_ENTER:
 
                         Vector2 dest = new Vector2(32, 32);
                         if (tile.Properties.ContainsKey("jumpto"))
@@ -529,7 +555,7 @@ namespace TileTest
 
                         break;
 
-                    case GameItems.MAZE_ENTER2:
+                    case GameItems.DESERT_ENTER:
 
                         Vector2 dst = new Vector2(32, 32);
                         if (tile.Properties.ContainsKey("jumpto"))
