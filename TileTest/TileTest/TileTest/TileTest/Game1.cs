@@ -69,6 +69,7 @@ namespace TileTest
             WATER = 977,
             MAZE_ENTER = 981,
             DESERT_ENTER = 998,
+            DUNGEON_EXIT = 995
         }
 
         public int score = 0;
@@ -140,17 +141,14 @@ namespace TileTest
 
             wallTypes = new List<int>();
             wallTypes.Add(821);// 821 is a wall
-            wallTypes.Add(881);//881 - 884 is lava
-            wallTypes.Add(882);
-            wallTypes.Add(883);
-            wallTypes.Add(884);
+            wallTypes.AddRange(Enumerable.Range(881, 4));//881 - 884 is lava
             wallTypes.Add(1097);//water level wall
             wallTypes.AddRange(Enumerable.Range(904, 9));
             wallTypes.AddRange(Enumerable.Range(854, 7));
 
             enemyWallTypes = new List<int>();
             enemyWallTypes.AddRange(wallTypes);
-            enemyWallTypes.AddRange(Enumerable.Range(881, 4));
+            enemyWallTypes.AddRange(Enumerable.Range(891,4));//water grates
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -612,8 +610,29 @@ namespace TileTest
                         }
 
                         break;
+                    case GameItems.DUNGEON_EXIT:
 
-                        
+                        Vector2 dstnation = new Vector2(32, 32);
+                        if (tile.Properties.ContainsKey("jumpto"))
+                        {
+                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                            destination.X = parts[0] * 32;
+                            destination.Y = parts[1] * 32;
+                        }
+
+                        if (tile.Properties.ContainsKey("map"))
+                        {
+                            switchMap(tile.Properties["map"], dstnation);
+                        }
+                        else
+                        {
+                            switchMap(currentMap, dstnation);
+                        }
+
+
+                        break;
+
+
                 }
             }
 

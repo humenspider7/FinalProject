@@ -5890,14 +5890,7 @@
           <Null Count="8" />
         </Row>
         <Row>
-          <Null Count="1" />
-          <Static Index="1001" BlendMode="Alpha">
-            <Properties>
-              <Property Key="jumpto" Type="String"><![CDATA[15,8]]></Property>
-              <Property Key="map" Type="String"><![CDATA[Spawn]]></Property>
-            </Properties>
-          </Static>
-          <Null Count="21" />
+          <Null Count="23" />
           <Static Index="723" BlendMode="Alpha">
             <Properties>
               <Property Key="type" Type="String"><![CDATA[items]]></Property>
