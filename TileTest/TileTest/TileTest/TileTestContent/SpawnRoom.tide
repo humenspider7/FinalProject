@@ -1109,8 +1109,11 @@
           <Animated Interval="250">
             <Frames>
               <TileSheet Ref="untitled tile sheet" />
-              <Static Index="989" BlendMode="Alpha" />
-              <Static Index="990" BlendMode="Alpha" />
+              <Static Index="977" BlendMode="Alpha" />
+              <Static Index="978" BlendMode="Alpha" />
+              <Static Index="977" BlendMode="Alpha" />
+              <Static Index="977" BlendMode="Alpha" />
+              <Static Index="978" BlendMode="Alpha" />
             </Frames>
             <Properties>
               <Property Key="type" Type="String"><![CDATA[items]]></Property>
@@ -1380,13 +1383,18 @@
         </Row>
         <Row>
           <Null Count="7" />
-          <Static Index="975" BlendMode="Alpha">
+          <Animated Interval="250">
+            <Frames>
+              <TileSheet Ref="untitled tile sheet" />
+              <Static Index="999" BlendMode="Alpha" />
+              <Static Index="998" BlendMode="Alpha" />
+            </Frames>
             <Properties>
               <Property Key="type" Type="String"><![CDATA[items]]></Property>
               <Property Key="map" Type="String"><![CDATA[desert]]></Property>
               <Property Key="jumpto" Type="String"><![CDATA[24,12]]></Property>
             </Properties>
-          </Static>
+          </Animated>
           <Null Count="14" />
           <Static Index="996" BlendMode="Alpha" />
           <Null Count="7" />

@@ -66,9 +66,9 @@ namespace TileTest
             CHEST = 2924,
             POTION = 723,
             STAIRS = 1001,
-            PORTAL = 989,
+            WATER = 977,
             MAZE_ENTER = 981,
-            DESERT_ENTER = 975,
+            DESERT_ENTER = 998,
         }
 
         public int score = 0;
@@ -337,8 +337,41 @@ namespace TileTest
 
             MouseState ms = Mouse.GetState();
             mouse.Location = new Vector2(ms.X - mouse.BoundingBoxRect.Width, ms.Y);
-          
 
+            if (healthNum == 6)
+            {
+                health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 196, 28), Vector2.Zero);
+            }
+
+            if (healthNum == 5)
+            {
+                health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 30, 196, 28), Vector2.Zero);
+            }
+
+            if (healthNum == 4)
+            {
+                health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 60, 196, 28), Vector2.Zero);
+            }
+
+            if (healthNum == 3)
+            {
+                health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 90, 196, 28), Vector2.Zero);
+            }
+
+            if (healthNum == 2)
+            {
+                health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 120, 196, 28), Vector2.Zero);
+            }
+
+            if (healthNum == 1)
+            {
+                health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 150, 196, 28), Vector2.Zero);
+            }
+
+            if (healthNum == 0)
+            {
+                health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 0, 0), Vector2.Zero);
+            }
 
             // TODO: Add your update logic here
             /*
@@ -354,7 +387,7 @@ namespace TileTest
             m_viewPort.Location.Y -= (int)(leftThumbStick.Y * 4.0f);
              */
 
-            
+
             if (kb.IsKeyDown(Keys.Right))
             {
                 m_viewPort.Location.X += 3;
@@ -427,6 +460,7 @@ namespace TileTest
                 {
                     if (canMove(hero, glayer, new Vector2(-32, 0)))
                     {
+                        hero = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), link, new Microsoft.Xna.Framework.Rectangle(262, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(-32, 0), duration);
                         lastDirection = Directions.LEFT;
                     }
@@ -434,7 +468,8 @@ namespace TileTest
                 else if (kb.IsKeyDown(Keys.D))
                 {
                     if (canMove(hero, glayer, new Vector2(32, 0)))
-                    { 
+                    {
+                        hero = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), link, new Microsoft.Xna.Framework.Rectangle(322, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(32, 0), duration);
                         lastDirection = Directions.RIGHT;
                     }
@@ -444,6 +479,7 @@ namespace TileTest
                 {
                     if (canMove(hero, glayer, new Vector2(0, -32)))
                     {
+                        hero = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), link, new Microsoft.Xna.Framework.Rectangle(298, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(0, -32), duration);
                         lastDirection = Directions.UP;
                     }
@@ -452,6 +488,7 @@ namespace TileTest
                 {
                     if (canMove(hero, glayer, new Vector2(0, 32)))
                     {
+                        hero = new Sprite(new Vector2 (hero.Location.X,hero.Location.Y),link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(0, 32), duration);
                         lastDirection = Directions.DOWN;
                     }
@@ -494,7 +531,7 @@ namespace TileTest
                         
                         break;
 
-                    case GameItems.PORTAL:
+                    case GameItems.WATER:
                         Vector2 dstination = new Vector2(32, 32);
                         if (tile.Properties.ContainsKey("jumpto"))
                         {
@@ -686,11 +723,10 @@ namespace TileTest
 
             health.Draw(spriteBatch);
 
-            if (healthNum > 0 && healthNum <= 6)
-            {
+            
                 spriteBatch.DrawString(
-                    pericles14, "Health:" + healthNum, healthLocation, Color.White);
-            }
+                    pericles14, "Health:", healthLocation, Color.White);
+            
             spriteBatch.DrawString(
                     pericles14,
                     "Score: " + score , scoreLocation, Color.White);
