@@ -66,7 +66,7 @@ namespace TileTest
             DESERT_ENTER = 998,
             DUNGEON_EXIT = 995,
             HELL_ENTER = 996,
-            HELL_ENTER2 = 883
+            HELL_ENTER2 = 785
         }
 
         public int score = 0;

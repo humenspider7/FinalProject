@@ -20,3 +20,4 @@ Content\Songs\maze.xnb
 Content\Songs\maze.wma
 Content\HellRoom.xnb
 Content\HellRoom2.xnb
+Content\Maze2.xnb
