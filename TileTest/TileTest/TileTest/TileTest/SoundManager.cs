@@ -8,6 +8,11 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using xTile;
+using xTile.Display;
+using xTile.Dimensions;
+using xTile.Tiles;
+using xTile.Layers;
 using System.Diagnostics;
 
 namespace TileTest

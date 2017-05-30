@@ -333,10 +333,7 @@ namespace TileTest
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            if (isAlGay == true)
-            {
-                SongManager.playSpawnRoom();
-            }
+
 
             MouseState ms = Mouse.GetState();
             mouse.Location = new Vector2(ms.X - mouse.BoundingBoxRect.Width, ms.Y);
@@ -726,6 +723,32 @@ namespace TileTest
             hero.Update(gameTime);
 
 
+            if (maps.ContainsKey("Spawn"))
+            {
+                SongManager.playSpawnRoom();
+            }
+
+            //MAZE ROOM HAS NO SONG
+            if (maps.ContainsKey("maze"))
+            {
+                SongManager.playSpawnRoom();
+            }
+
+            if (maps.ContainsKey("desert"))
+            {
+                SongManager.playDesert();
+            }
+
+            if (maps.ContainsKey("water"))
+            {
+                SongManager.playWater();
+            }
+
+            //HELL ROOM NOT LOADED
+            if (maps.ContainsKey("hell"))
+            {
+                SongManager.playSpawnRoom();
+            }
 
             base.Update(gameTime);
         }
