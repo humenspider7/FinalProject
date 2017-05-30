@@ -197,7 +197,7 @@ namespace TileTest
 
             
             hero = new Sprite(new Vector2(480, 384), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
-
+            heroWep = new Sprite(new Vector2(480, 384), spriteSheet, new Microsoft.Xna.Framework.Rectangle(1824, 288, 32, 32), Vector2.Zero);
             enemies = new List<Sprite>();
 
             switchMap("Spawn", new Vector2(480, 384));
