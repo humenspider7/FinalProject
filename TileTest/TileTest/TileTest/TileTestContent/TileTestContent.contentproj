@@ -57,7 +57,9 @@
       <Processor>TideProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Sounds\" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Fonts\Pericles14.spritefont">
       <Name>Pericles14</Name>
@@ -108,22 +110,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\hellTheme.wav">
+    <Compile Include="Songs\hellTheme.wav">
       <Name>hellTheme</Name>
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
-    <Compile Include="Sounds\overworld.wav">
+    <Compile Include="Songs\overworld.wav">
       <Name>overworld</Name>
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
-    <Compile Include="Sounds\sandsea.wav">
+    <Compile Include="Songs\sandsea.wav">
       <Name>sandsea</Name>
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
-    <Compile Include="Sounds\waterTheme.wav">
+    <Compile Include="Songs\waterTheme.wav">
       <Name>waterTheme</Name>
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>

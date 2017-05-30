@@ -28,12 +28,12 @@ namespace TileTest
             try
             {
                 // load song files here.
-                spawnroom = content.Load<Song>(@"Sounds\overworld");
+                spawnroom = content.Load<Song>(@"Songs\overworld");
 
-                //maze = content.Load<Song>(@"Sounds\");
-                desert = content.Load<Song>(@"Sounds\sandsea");
-                water = content.Load<Song>(@"Sounds\waterTheme");
-                hell = content.Load<Song>(@"Sounds\hellTheme");
+                //maze = content.Load<Song>(@"Songs\");
+                desert = content.Load<Song>(@"Songs\sandsea");
+                water = content.Load<Song>(@"Songs\waterTheme");
+                hell = content.Load<Song>(@"Songs\hellTheme");
             }
             catch
             {
@@ -106,47 +106,9 @@ namespace TileTest
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public static void stopSongs()
+        {
+            MediaPlayer.Stop();
+        }
     }
 }

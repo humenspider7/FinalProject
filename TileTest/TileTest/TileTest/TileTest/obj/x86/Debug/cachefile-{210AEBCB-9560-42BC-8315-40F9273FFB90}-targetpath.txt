@@ -8,11 +8,11 @@ Content\SpawnRoom.xnb
 Content\DesertRoom.xnb
 Content\Water Level.xnb
 Content\Fonts\Pericles14.xnb
-Content\Sounds\hellTheme.xnb
-Content\Sounds\hellTheme.wma
-Content\Sounds\overworld.xnb
-Content\Sounds\overworld.wma
-Content\Sounds\sandsea.xnb
-Content\Sounds\sandsea.wma
-Content\Sounds\waterTheme.xnb
-Content\Sounds\waterTheme.wma
+Content\Songs\hellTheme.xnb
+Content\Songs\hellTheme.wma
+Content\Songs\overworld.xnb
+Content\Songs\overworld.wma
+Content\Songs\sandsea.xnb
+Content\Songs\sandsea.wma
+Content\Songs\waterTheme.xnb
+Content\Songs\waterTheme.wma

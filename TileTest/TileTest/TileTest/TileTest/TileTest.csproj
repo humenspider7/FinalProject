@@ -78,6 +78,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Randnum.cs" />
     <Compile Include="SongManager.cs" />
+    <Compile Include="SoundManager.cs" />
     <Compile Include="Sprite.cs" />
   </ItemGroup>
   <ItemGroup>

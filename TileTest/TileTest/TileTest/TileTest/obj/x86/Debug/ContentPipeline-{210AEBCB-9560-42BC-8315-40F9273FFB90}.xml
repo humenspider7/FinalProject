@@ -122,43 +122,43 @@
       <Time>2017-05-29T19:40:22.8861032-04:00</Time>
     </Item>
     <Item>
-      <Source>Sounds\hellTheme.wav</Source>
-      <Name>Sounds\hellTheme</Name>
+      <Source>Songs\hellTheme.wav</Source>
+      <Name>Songs\hellTheme</Name>
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Sounds\hellTheme.xnb</Output>
-      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Sounds\hellTheme.wma</Extra>
+      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\hellTheme.xnb</Output>
+      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\hellTheme.wma</Extra>
       <Time>2017-05-29T20:12:53.4596077-04:00</Time>
     </Item>
     <Item>
-      <Source>Sounds\overworld.wav</Source>
-      <Name>Sounds\overworld</Name>
+      <Source>Songs\overworld.wav</Source>
+      <Name>Songs\overworld</Name>
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Sounds\overworld.xnb</Output>
-      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Sounds\overworld.wma</Extra>
+      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\overworld.xnb</Output>
+      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\overworld.wma</Extra>
       <Time>2017-05-29T20:09:24.1833247-04:00</Time>
     </Item>
     <Item>
-      <Source>Sounds\sandsea.wav</Source>
-      <Name>Sounds\sandsea</Name>
+      <Source>Songs\sandsea.wav</Source>
+      <Name>Songs\sandsea</Name>
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Sounds\sandsea.xnb</Output>
-      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Sounds\sandsea.wma</Extra>
+      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\sandsea.xnb</Output>
+      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\sandsea.wma</Extra>
       <Time>2017-05-29T20:10:55.8815938-04:00</Time>
     </Item>
     <Item>
-      <Source>Sounds\waterTheme.wav</Source>
-      <Name>Sounds\waterTheme</Name>
+      <Source>Songs\waterTheme.wav</Source>
+      <Name>Songs\waterTheme</Name>
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Sounds\waterTheme.xnb</Output>
-      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Sounds\waterTheme.wma</Extra>
+      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\waterTheme.xnb</Output>
+      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\waterTheme.wma</Extra>
       <Time>2017-05-29T20:19:34.7514999-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>

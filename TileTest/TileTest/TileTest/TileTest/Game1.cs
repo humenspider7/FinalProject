@@ -333,6 +333,11 @@ namespace TileTest
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            if (isAlGay == true)
+            {
+                SongManager.playSpawnRoom();
+            }
+
             MouseState ms = Mouse.GetState();
             mouse.Location = new Vector2(ms.X - mouse.BoundingBoxRect.Width, ms.Y);
 
@@ -716,8 +721,11 @@ namespace TileTest
             m_viewPort.Location.X = Math.Min(maps[currentMap].DisplayWidth - m_viewPort.Width, m_viewPort.X);
             m_viewPort.Location.Y = Math.Min(maps[currentMap].DisplayHeight - m_viewPort.Height, m_viewPort.Y);
 
+           
             maps[currentMap].Update(gameTime.ElapsedGameTime.Milliseconds);
             hero.Update(gameTime);
+
+
 
             base.Update(gameTime);
         }
