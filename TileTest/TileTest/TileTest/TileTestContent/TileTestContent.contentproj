@@ -125,6 +125,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Songs\waterTheme.wav">
       <Name>waterTheme</Name>
       <Importer>WavImporter</Importer>

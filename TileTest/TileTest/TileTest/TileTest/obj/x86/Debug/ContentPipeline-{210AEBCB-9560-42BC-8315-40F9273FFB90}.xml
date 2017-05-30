@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Output>
-      <Time>2017-05-29T19:40:22.8846018-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Output>
+      <Time>2017-05-30T10:43:50.4734154-04:00</Time>
     </Item>
     <Item>
       <Source>Textures\heartSprite.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Textures\heartSprite.xnb</Output>
-      <Time>2017-05-29T19:40:23.0196628-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Textures\heartSprite.xnb</Output>
+      <Time>2017-05-30T10:43:51.5387609-04:00</Time>
     </Item>
     <Item>
       <Source>Textures\spritesheet.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Textures\spritesheet.xnb</Output>
-      <Time>2017-05-29T19:40:23.0206484-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Textures\spritesheet.xnb</Output>
+      <Time>2017-05-30T10:43:51.7980754-04:00</Time>
     </Item>
     <Item>
       <Source>Map1.tide</Source>
@@ -34,13 +34,13 @@
       <Importer>TideImporter</Importer>
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Map1.xnb</Output>
-      <Time>2017-05-29T19:40:22.907039-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Map1.xnb</Output>
+      <Time>2017-05-30T10:43:50.4773959-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
-        <Value>2017-05-29T19:40:22.8846018-04:00</Value>
+        <Value>2017-05-30T10:43:50.4734154-04:00</Value>
       </Dependency>
-      <Request>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
+      <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
     <Item>
       <Source>DemoMap.tide</Source>
@@ -48,13 +48,13 @@
       <Importer>TideImporter</Importer>
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DemoMap.xnb</Output>
-      <Time>2017-05-29T19:40:22.8520706-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DemoMap.xnb</Output>
+      <Time>2017-05-30T10:43:50.4575407-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
-        <Value>2017-05-29T19:40:22.8846018-04:00</Value>
+        <Value>2017-05-30T10:43:50.4734154-04:00</Value>
       </Dependency>
-      <Request>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
+      <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
     <Item>
       <Source>DemoMap2.tide</Source>
@@ -62,13 +62,13 @@
       <Importer>TideImporter</Importer>
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DemoMap2.xnb</Output>
-      <Time>2017-05-29T19:40:22.8640821-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DemoMap2.xnb</Output>
+      <Time>2017-05-30T10:43:50.4585421-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
-        <Value>2017-05-29T19:40:22.8846018-04:00</Value>
+        <Value>2017-05-30T10:43:50.4734154-04:00</Value>
       </Dependency>
-      <Request>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
+      <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
     <Item>
       <Source>SpawnRoom.tide</Source>
@@ -76,13 +76,13 @@
       <Importer>TideImporter</Importer>
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\SpawnRoom.xnb</Output>
-      <Time>2017-05-29T19:40:22.9240556-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\SpawnRoom.xnb</Output>
+      <Time>2017-05-30T10:43:51.4406932-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
-        <Value>2017-05-29T19:40:22.8846018-04:00</Value>
+        <Value>2017-05-30T10:43:50.4734154-04:00</Value>
       </Dependency>
-      <Request>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
+      <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
     <Item>
       <Source>DesertRoom.tide</Source>
@@ -90,13 +90,13 @@
       <Importer>TideImporter</Importer>
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DesertRoom.xnb</Output>
-      <Time>2017-05-29T19:40:22.8725903-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DesertRoom.xnb</Output>
+      <Time>2017-05-30T10:43:50.461383-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
-        <Value>2017-05-29T19:40:22.8846018-04:00</Value>
+        <Value>2017-05-30T10:43:50.4734154-04:00</Value>
       </Dependency>
-      <Request>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
+      <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
     <Item>
       <Source>Water Level.tide</Source>
@@ -104,13 +104,13 @@
       <Importer>TideImporter</Importer>
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Water Level.xnb</Output>
-      <Time>2017-05-29T19:40:23.0421863-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Water Level.xnb</Output>
+      <Time>2017-05-30T10:43:51.8140875-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
-        <Value>2017-05-29T19:40:22.8846018-04:00</Value>
+        <Value>2017-05-30T10:43:50.4734154-04:00</Value>
       </Dependency>
-      <Request>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
+      <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
     <Item>
       <Source>Fonts\Pericles14.spritefont</Source>
@@ -118,8 +118,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Fonts\Pericles14.xnb</Output>
-      <Time>2017-05-29T19:40:22.8861032-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Fonts\Pericles14.xnb</Output>
+      <Time>2017-05-30T10:43:50.4743948-04:00</Time>
     </Item>
     <Item>
       <Source>Songs\hellTheme.wav</Source>
@@ -127,9 +127,9 @@
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\hellTheme.xnb</Output>
-      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\hellTheme.wma</Extra>
-      <Time>2017-05-29T20:12:53.4596077-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\hellTheme.xnb</Output>
+      <Extra>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\hellTheme.wma</Extra>
+      <Time>2017-05-30T10:43:50.6565371-04:00</Time>
     </Item>
     <Item>
       <Source>Songs\overworld.wav</Source>
@@ -137,9 +137,9 @@
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\overworld.xnb</Output>
-      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\overworld.wma</Extra>
-      <Time>2017-05-29T20:09:24.1833247-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\overworld.xnb</Output>
+      <Extra>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\overworld.wma</Extra>
+      <Time>2017-05-30T10:43:50.8256577-04:00</Time>
     </Item>
     <Item>
       <Source>Songs\sandsea.wav</Source>
@@ -147,9 +147,9 @@
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\sandsea.xnb</Output>
-      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\sandsea.wma</Extra>
-      <Time>2017-05-29T20:10:55.8815938-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\sandsea.xnb</Output>
+      <Extra>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\sandsea.wma</Extra>
+      <Time>2017-05-30T10:43:51.2249295-04:00</Time>
     </Item>
     <Item>
       <Source>Songs\waterTheme.wav</Source>
@@ -157,9 +157,9 @@
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\waterTheme.xnb</Output>
-      <Extra>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\waterTheme.wma</Extra>
-      <Time>2017-05-29T20:19:34.7514999-04:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\waterTheme.xnb</Output>
+      <Extra>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\waterTheme.wma</Extra>
+      <Time>2017-05-30T11:11:02.5043671-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -168,15 +168,15 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTestContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTestContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>C:\Users\Yusuf\Documents\GitHub\FinalProject\TileTest\xTilePipeline\bin\x86\Debug\xTile.Pipeline.dll</Key>
-        <Value>2017-05-29T20:03:57.7311558-04:00</Value>
+        <Key>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\xTilePipeline\bin\x86\Debug\xTile.Pipeline.dll</Key>
+        <Value>2017-05-30T10:50:45.9112733-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
@@ -203,8 +203,8 @@
         <Value>2011-09-01T16:22:30-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2017-04-10T21:09:45.3495304-04:00</Value>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2016-07-06T15:09:45.1724648-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

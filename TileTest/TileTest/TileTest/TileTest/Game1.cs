@@ -87,7 +87,7 @@ namespace TileTest
         Dictionary<String, Map> maps;
         Dictionary<String, bool> mapsMonstersLoaded;
 
-        String currentMap = "Spawn";
+        String currentMap = "";
 
         List<int> wallTypes;
         List<int> enemyWallTypes;
@@ -132,6 +132,8 @@ namespace TileTest
         /// </summary>
         protected override void LoadContent()
         {
+            SongManager.Initialize(this.Content);
+
             MouseState ms = new MouseState();
 
             items = new List<int>();
@@ -191,7 +193,7 @@ namespace TileTest
 
             enemies = new List<Sprite>();
 
-            LoadMonsters();
+            switchMap("Spawn", new Vector2(480, 384));
 
             health = new Sprite(new Vector2(105, 10), heartSprite, new Microsoft.Xna.Framework.Rectangle(0, 0, 196, 28), Vector2.Zero);
 
@@ -307,6 +309,7 @@ namespace TileTest
 
         public void switchMap (String mapname, Vector2 position)
         {
+            bool newSong = (currentMap != mapname);
 
             currentMap = mapname;
             hero.Location = position;
@@ -319,6 +322,27 @@ namespace TileTest
             {
                 LoadMonsters();
                 mapsMonstersLoaded[currentMap] = true;
+            }
+
+            if (newSong)
+            {
+                SongManager.stopSongs();
+
+                switch (currentMap)
+                {
+                    case "Spawn":
+                        SongManager.playSpawnRoom();
+                        break;
+                    case "maze":
+                        SongManager.playSpawnRoom();
+                        break;
+                    case "desert":
+                        SongManager.playDesert();
+                        break;
+                    case "water":
+                        SongManager.playWater();
+                        break;
+                }
             }
         }
         /// <summary>
@@ -718,37 +742,13 @@ namespace TileTest
             m_viewPort.Location.X = Math.Min(maps[currentMap].DisplayWidth - m_viewPort.Width, m_viewPort.X);
             m_viewPort.Location.Y = Math.Min(maps[currentMap].DisplayHeight - m_viewPort.Height, m_viewPort.Y);
 
-           
+
+            
+
+
             maps[currentMap].Update(gameTime.ElapsedGameTime.Milliseconds);
             hero.Update(gameTime);
 
-
-            if (maps.ContainsKey("Spawn"))
-            {
-                SongManager.playSpawnRoom();
-            }
-
-            //MAZE ROOM HAS NO SONG
-            if (maps.ContainsKey("maze"))
-            {
-                SongManager.playSpawnRoom();
-            }
-
-            if (maps.ContainsKey("desert"))
-            {
-                SongManager.playDesert();
-            }
-
-            if (maps.ContainsKey("water"))
-            {
-                SongManager.playWater();
-            }
-
-            //HELL ROOM NOT LOADED
-            if (maps.ContainsKey("hell"))
-            {
-                SongManager.playSpawnRoom();
-            }
 
             base.Update(gameTime);
         }
