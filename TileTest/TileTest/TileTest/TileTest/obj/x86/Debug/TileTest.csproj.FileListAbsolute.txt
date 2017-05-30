@@ -70,3 +70,7 @@ C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTes
 C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\overworld.wma
 C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\sandsea.wma
 C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\waterTheme.wma
+C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\maze.xnb
+C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\maze.wma
+C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\HellRoom.xnb
+C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\HellRoom2.xnb

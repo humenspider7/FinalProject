@@ -77,7 +77,7 @@
       <Processor>TideProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\SpawnRoom.xnb</Output>
-      <Time>2017-05-30T10:43:51.4406932-04:00</Time>
+      <Time>2017-05-30T12:16:26.6100157-04:00</Time>
       <Dependency>
         <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
         <Value>2017-05-30T10:43:50.4734154-04:00</Value>
@@ -160,6 +160,44 @@
       <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\waterTheme.xnb</Output>
       <Extra>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\waterTheme.wma</Extra>
       <Time>2017-05-30T11:11:02.5043671-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Songs\maze.wav</Source>
+      <Name>Songs\maze</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\maze.xnb</Output>
+      <Extra>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\Songs\maze.wma</Extra>
+      <Time>2017-05-30T12:01:44.4379399-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HellRoom.tide</Source>
+      <Name>HellRoom</Name>
+      <Importer>TideImporter</Importer>
+      <Processor>TideProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\HellRoom.xnb</Output>
+      <Time>2017-05-30T11:26:20.0874289-04:00</Time>
+      <Dependency>
+        <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
+        <Value>2017-05-30T10:43:50.4734154-04:00</Value>
+      </Dependency>
+      <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
+    </Item>
+    <Item>
+      <Source>HellRoom2.tide</Source>
+      <Name>HellRoom2</Name>
+      <Importer>TideImporter</Importer>
+      <Processor>TideProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\HellRoom2.xnb</Output>
+      <Time>2017-05-30T11:32:26.640871-04:00</Time>
+      <Dependency>
+        <Key>DungeonCrawl_ProjectUtumnoTileset.png</Key>
+        <Value>2017-05-30T10:43:50.4734154-04:00</Value>
+      </Dependency>
+      <Request>C:\Users\eahscs\Documents\GitHub\FinalProject\TileTest\TileTest\TileTest\TileTest\bin\x86\Debug\Content\DungeonCrawl_ProjectUtumnoTileset.xnb</Request>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

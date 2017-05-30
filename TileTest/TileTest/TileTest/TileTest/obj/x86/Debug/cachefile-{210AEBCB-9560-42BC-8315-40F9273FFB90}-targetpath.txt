@@ -16,3 +16,7 @@ Content\Songs\sandsea.xnb
 Content\Songs\sandsea.wma
 Content\Songs\waterTheme.xnb
 Content\Songs\waterTheme.wma
+Content\Songs\maze.xnb
+Content\Songs\maze.wma
+Content\HellRoom.xnb
+Content\HellRoom2.xnb

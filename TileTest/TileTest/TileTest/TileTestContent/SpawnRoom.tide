@@ -1396,7 +1396,13 @@
             </Properties>
           </Animated>
           <Null Count="14" />
-          <Static Index="996" BlendMode="Alpha" />
+          <Static Index="996" BlendMode="Alpha">
+            <Properties>
+              <Property Key="type" Type="String"><![CDATA[items]]></Property>
+              <Property Key="map" Type="String"><![CDATA[hell]]></Property>
+              <Property Key="jumpto" Type="String"><![CDATA[5,4]]></Property>
+            </Properties>
+          </Static>
           <Null Count="7" />
         </Row>
         <Row>

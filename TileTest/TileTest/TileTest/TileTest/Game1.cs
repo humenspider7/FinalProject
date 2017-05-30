@@ -29,21 +29,16 @@ namespace TileTest
      /*
        TO DO LIST
 
-            1. Enable spawn room.  Spawn Room is enabled.
-                a. Enable teleportation to corresponding dungeon from spawn room.
-                b. Add decorations to each spawn room.
             2. Enable damage.
                 a. Press space in front of enemies to damage them and reduce enemy health value
-                b. Touch an enemy to lose -1 health value.
-            3. Fix health sprite to reflect healthNum
-                a. Make it so if you take damage, the amount of hearts decrease.
-                b. If you gain health, you gain a heart sprite.
             4. Enable game states.
                 a. Playing, title screen, game over.+
-
             5. Make a boss fight. Final boss.
                 a. Make a bool for each dungeon.  isDungeon1Complete = false; For every dungeon, it starts false.  When finished it will go true.  If all 4 bool values
                 = true, then a secret dungeon will appear with a final boss.
+            6. WORK ON MAPS
+                a. FINISH EM
+            
       */
 
 
@@ -69,7 +64,9 @@ namespace TileTest
             WATER = 977,
             MAZE_ENTER = 981,
             DESERT_ENTER = 998,
-            DUNGEON_EXIT = 995
+            DUNGEON_EXIT = 995,
+            HELL_ENTER = 996,
+            HELL_ENTER2 = 883
         }
 
         public int score = 0;
@@ -78,6 +75,7 @@ namespace TileTest
 
         XnaDisplayDevice m_xnaDisplayDevice;
         Sprite hero;
+        Sprite heroWep;
         List<Sprite> enemies;
         Sprite mouse;
         Sprite health;
@@ -147,6 +145,7 @@ namespace TileTest
             wallTypes.Add(1097);//water level wall
             wallTypes.AddRange(Enumerable.Range(904, 9));
             wallTypes.AddRange(Enumerable.Range(854, 7));
+            wallTypes.Add(1092);
 
             enemyWallTypes = new List<int>();
             enemyWallTypes.AddRange(wallTypes);
@@ -170,7 +169,7 @@ namespace TileTest
             maps.Add("maze", Content.Load<Map>("DemoMap"));
             maps["maze"].LoadTileSheets(m_xnaDisplayDevice);
 
-            maps.Add("level2", Content.Load<Map>("Map1"));
+            maps.Add("level2", Content.Load<Map>("Maze2"));
             maps["level2"].LoadTileSheets(m_xnaDisplayDevice);
 
             maps.Add("water", Content.Load<Map>("Water Level"));
@@ -178,6 +177,14 @@ namespace TileTest
 
             maps.Add("desert", Content.Load<Map>("DesertRoom"));
             maps["desert"].LoadTileSheets(m_xnaDisplayDevice);
+
+            maps.Add("hell", Content.Load<Map>("HellRoom"));
+            maps["hell"].LoadTileSheets(m_xnaDisplayDevice);
+
+            maps.Add("hell2", Content.Load<Map>("HellRoom2"));
+            maps["hell2"].LoadTileSheets(m_xnaDisplayDevice);
+
+
 
             //Debug.Assert (!Object.ReferenceEquals(maps["level1"], maps["level2"]));
             //map = Content.Load<Map>("Map1");
@@ -334,13 +341,16 @@ namespace TileTest
                         SongManager.playSpawnRoom();
                         break;
                     case "maze":
-                        SongManager.playSpawnRoom();
+                        SongManager.playMaze();
                         break;
                     case "desert":
                         SongManager.playDesert();
                         break;
                     case "water":
                         SongManager.playWater();
+                        break;
+                    case "hell":
+                        SongManager.playHell();
                         break;
                 }
             }
@@ -636,6 +646,49 @@ namespace TileTest
                         }
 
                         break;
+
+                    case GameItems.HELL_ENTER:
+
+                        Vector2 dsti = new Vector2(32, 32);
+                        if (tile.Properties.ContainsKey("jumpto"))
+                        {
+                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                            dst.X = parts[0] * 32;
+                            dst.Y = parts[1] * 32;
+                        }
+
+                        if (tile.Properties.ContainsKey("map"))
+                        {
+                            switchMap(tile.Properties["map"], dsti);
+                        }
+                        else
+                        {
+                            switchMap(currentMap, dsti);
+                        }
+
+                        break;
+
+                    case GameItems.HELL_ENTER2:
+
+                        Vector2 dstin = new Vector2(32, 32);
+                        if (tile.Properties.ContainsKey("jumpto"))
+                        {
+                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                            dst.X = parts[0] * 32;
+                            dst.Y = parts[1] * 32;
+                        }
+
+                        if (tile.Properties.ContainsKey("map"))
+                        {
+                            switchMap(tile.Properties["map"], dstin);
+                        }
+                        else
+                        {
+                            switchMap(currentMap, dstin);
+                        }
+
+                        break;
+
                     case GameItems.DUNGEON_EXIT:
 
                         Vector2 dstnation = new Vector2(32, 32);
