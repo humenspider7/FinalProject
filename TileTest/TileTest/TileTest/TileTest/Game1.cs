@@ -94,6 +94,7 @@ namespace TileTest
         List<int> wallTypes;
         List<int> enemyWallTypes;
         List<int> items;
+        List<int> weaponWallTypes;
 
         enum Directions {  STATIONARY, LEFT, RIGHT, UP, DOWN }
 
@@ -155,6 +156,9 @@ namespace TileTest
             enemyWallTypes.AddRange(wallTypes);
             enemyWallTypes.AddRange(Enumerable.Range(891,4));//water grates
 
+            weaponWallTypes = new List<int>();
+            weaponWallTypes.AddRange(wallTypes);
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -201,7 +205,7 @@ namespace TileTest
 
             
             hero = new Sprite(new Vector2(480, 384), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
-            heroWep = new Sprite(new Vector2(480, 384), spriteSheet, new Microsoft.Xna.Framework.Rectangle(1824, 288, 32, 32), Vector2.Zero);
+            heroWep = new Sprite(new Vector2(0, 0), spriteSheet, new Microsoft.Xna.Framework.Rectangle(0, 0, 0, 0), Vector2.Zero);
             enemies = new List<Sprite>();
 
             switchMap("Spawn", new Vector2(480, 384));
@@ -491,6 +495,7 @@ namespace TileTest
                 nme.Update(gameTime);
             }
 
+
             float duration = 0.2f;
             if (hero.state == SpriteStates.IDLE)
             {
@@ -501,6 +506,11 @@ namespace TileTest
                         hero = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), link, new Microsoft.Xna.Framework.Rectangle(262, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(-32, 0), duration);
                         lastDirection = Directions.LEFT;
+                        if (kb.IsKeyDown(Keys.Space))
+                        {
+                            heroWep = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), spriteSheet, new Microsoft.Xna.Framework.Rectangle(1954, 290, 32, 32), new Vector2(-320, 0));
+                        }
+
                     }
                 }
                 else if (kb.IsKeyDown(Keys.D))
@@ -510,6 +520,10 @@ namespace TileTest
                         hero = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), link, new Microsoft.Xna.Framework.Rectangle(322, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(32, 0), duration);
                         lastDirection = Directions.RIGHT;
+                        if (kb.IsKeyDown(Keys.Space))
+                        {
+                            heroWep = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), spriteSheet, new Microsoft.Xna.Framework.Rectangle(1826, 290, 32, 32), new Vector2(320, 0));
+                        }
                     }
 
                 }
@@ -520,6 +534,10 @@ namespace TileTest
                         hero = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), link, new Microsoft.Xna.Framework.Rectangle(298, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(0, -32), duration);
                         lastDirection = Directions.UP;
+                        if (kb.IsKeyDown(Keys.Space))
+                        {
+                            heroWep = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), spriteSheet, new Microsoft.Xna.Framework.Rectangle(1762, 290, 32, 32), new Vector2(0, -320));
+                        }
                     }
                 }
                 else if (kb.IsKeyDown(Keys.S))
@@ -529,6 +547,10 @@ namespace TileTest
                         hero = new Sprite(new Vector2 (hero.Location.X,hero.Location.Y),link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(0, 32), duration);
                         lastDirection = Directions.DOWN;
+                        if (kb.IsKeyDown(Keys.Space))
+                        {
+                            heroWep = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), spriteSheet, new Microsoft.Xna.Framework.Rectangle(1890, 290, 32, 32), new Vector2(0, 320));
+                        }
                     }
                 }
             }
@@ -838,7 +860,7 @@ namespace TileTest
 
             maps[currentMap].Update(gameTime.ElapsedGameTime.Milliseconds);
             hero.Update(gameTime);
-
+            heroWep.Update(gameTime);
 
             base.Update(gameTime);
         }
