@@ -31,6 +31,7 @@ namespace TileTest
 
             2. Enable damage.
                 a. Press space in front of enemies to damage them and reduce enemy health value
+                b. If health ==6, arrow shoots 5 tiles.  If health < 6, arrow shoots 1 tile.
             4. Enable game states.
                 a. Playing, title screen, game over.+
             5. Make a boss fight. Final boss.
@@ -60,6 +61,9 @@ namespace TileTest
         {
             CHEST = 2924,
             POTION = 723,
+            POTION2 = 724,
+            WATER_CHEST = 725,
+            WATER_CHEST2 = 726,
             STAIRS = 1001,
             WATER = 977,
             MAZE_ENTER = 981,
@@ -69,7 +73,7 @@ namespace TileTest
             HELL_ENTER2 = 785
         }
 
-        public int score = 0;
+        public int score = 100;
 
         xTile.Dimensions.Rectangle m_viewPort;
 
@@ -79,7 +83,7 @@ namespace TileTest
         List<Sprite> enemies;
         Sprite mouse;
         Sprite health;
-        int healthNum = 6; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
+        int healthNum = 5; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
         SpriteFont pericles14;
 
         Dictionary<String, Map> maps;
@@ -565,6 +569,39 @@ namespace TileTest
                         
                         break;
 
+                    case GameItems.POTION2:
+                        // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
+                        if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty") && healthNum < 6 && healthNum > 0 && score >= 100)  //Pressing F to interact does not work.
+                        {
+                            score -= 100;
+                            healthNum += 1;
+                            tile.Properties["empty"] = true;
+                            tile.TileIndex = 729;
+                        }
+
+                        break;
+
+                    case GameItems.WATER_CHEST:
+                        // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
+                        if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty"))  //Pressing F to interact does not work.
+                        {
+                            score += 100;
+                            tile.Properties["empty"] = true;
+                            tile.TileIndex = 729;
+                        }
+
+                        break;
+
+                    case GameItems.WATER_CHEST2:
+                        // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
+                        if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty"))  //Pressing F to interact does not work.
+                        {
+                            score += 100;
+                            tile.Properties["empty"] = true;
+                            tile.TileIndex = 729;
+                        }
+
+                        break;
                     case GameItems.WATER:
                         Vector2 dstination = new Vector2(32, 32);
                         if (tile.Properties.ContainsKey("jumpto"))
@@ -817,6 +854,8 @@ namespace TileTest
             //GraphicsDevice.SetRenderTarget(rt);
             spriteBatch.Begin();
             maps[currentMap].Draw(m_xnaDisplayDevice, m_viewPort, Location.Origin, false);
+
+            heroWep.Draw(spriteBatch, m_viewPort);
             hero.Draw(spriteBatch, m_viewPort);
 
             foreach (Enemy nme in enemies)
@@ -834,7 +873,10 @@ namespace TileTest
                     pericles14,
                     "Score: " + score , scoreLocation, Color.White);
 
+
             mouse.Draw(spriteBatch);
+
+          
 
             spriteBatch.End();
 

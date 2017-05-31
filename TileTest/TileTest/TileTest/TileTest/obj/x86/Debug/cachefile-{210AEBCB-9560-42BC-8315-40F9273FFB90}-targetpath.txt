@@ -7,6 +7,9 @@ Content\DemoMap2.xnb
 Content\SpawnRoom.xnb
 Content\DesertRoom.xnb
 Content\Water Level.xnb
+Content\HellRoom.xnb
+Content\HellRoom2.xnb
+Content\Maze2.xnb
 Content\Fonts\Pericles14.xnb
 Content\Songs\hellTheme.xnb
 Content\Songs\hellTheme.wma
@@ -18,6 +21,3 @@ Content\Songs\waterTheme.xnb
 Content\Songs\waterTheme.wma
 Content\Songs\maze.xnb
 Content\Songs\maze.wma
-Content\HellRoom.xnb
-Content\HellRoom2.xnb
-Content\Maze2.xnb

@@ -3147,7 +3147,11 @@
         </Row>
         <Row>
           <Null Count="18" />
-          <Static Index="723" BlendMode="Alpha" />
+          <Static Index="723" BlendMode="Alpha">
+            <Properties>
+              <Property Key="type" Type="String"><![CDATA[items]]></Property>
+            </Properties>
+          </Static>
           <Null Count="24" />
           <Static Index="5" BlendMode="Alpha" />
           <Static Index="5" BlendMode="Alpha" />
@@ -3457,7 +3461,15 @@
           <Null Count="60" />
         </Row>
         <Row>
-          <Null Count="60" />
+          <Null Count="58" />
+          <Static Index="995" BlendMode="Alpha">
+            <Properties>
+              <Property Key="type" Type="String"><![CDATA[items]]></Property>
+              <Property Key="map" Type="String"><![CDATA[Spawn]]></Property>
+              <Property Key="jumpto" Type="String"><![CDATA[15, 12]]></Property>
+            </Properties>
+          </Static>
+          <Null Count="1" />
         </Row>
         <Row>
           <Null Count="60" />
