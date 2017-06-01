@@ -26,21 +26,25 @@ namespace TileTest
         SpriteBatch spriteBatch;
         bool isAlGay = true;
         bool isAlStupid = true;
-     /*
-       TO DO LIST
+        bool up = false;
+        bool down = false;
+        bool left = false;
+        bool right = false;
+        /*
+          TO DO LIST
 
-            2. Enable damage.
-                a. Press space in front of enemies to damage them and reduce enemy health value
-                b. If health ==6, arrow shoots 5 tiles.  If health < 6, arrow shoots 1 tile.
-            4. Enable game states.
-                a. Playing, title screen, game over.+
-            5. Make a boss fight. Final boss.
-                a. Make a bool for each dungeon.  isDungeon1Complete = false; For every dungeon, it starts false.  When finished it will go true.  If all 4 bool values
-                = true, then a secret dungeon will appear with a final boss.
-            6. WORK ON MAPS
-                a. FINISH EM
-            
-      */
+               2. Enable damage.
+                   a. Press space in front of enemies to damage them and reduce enemy health value
+                   b. If health ==6, arrow shoots 5 tiles.  If health < 6, arrow shoots 1 tile.
+               4. Enable game states.
+                   a. Playing, title screen, game over.+
+               5. Make a boss fight. Final boss.
+                   a. Make a bool for each dungeon.  isDungeon1Complete = false; For every dungeon, it starts false.  When finished it will go true.  If all 4 bool values
+                   = true, then a secret dungeon will appear with a final boss.
+               6. WORK ON MAPS
+                   a. FINISH EM
+
+         */
 
 
 
@@ -73,7 +77,7 @@ namespace TileTest
             HELL_ENTER2 = 785
         }
 
-        public int score = 100;
+        public int score = 0;
 
         xTile.Dimensions.Rectangle m_viewPort;
 
@@ -83,7 +87,7 @@ namespace TileTest
         List<Sprite> enemies;
         Sprite mouse;
         Sprite health;
-        int healthNum = 5; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
+        int healthNum = 6; //Health number variable.  For each damage affect, healthNum -=1.  if healthNum ==0; gameover.  
         SpriteFont pericles14;
 
         Dictionary<String, Map> maps;
@@ -105,7 +109,7 @@ namespace TileTest
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
             graphics.PreferredBackBufferWidth = 960;//960
             graphics.PreferredBackBufferHeight = 540;//540
             graphics.ApplyChanges();
@@ -151,6 +155,8 @@ namespace TileTest
             wallTypes.AddRange(Enumerable.Range(904, 9));
             wallTypes.AddRange(Enumerable.Range(854, 7));
             wallTypes.Add(1092);
+            wallTypes.AddRange(Enumerable.Range(795, 8));
+            //795-802
 
             enemyWallTypes = new List<int>();
             enemyWallTypes.AddRange(wallTypes);
@@ -245,6 +251,11 @@ namespace TileTest
                     }
                 }
             }
+        }
+
+        public void killEnemyTimes1000(Sprite nme)
+        {
+            enemies.Remove(nme);
         }
 
         /// <summary>
@@ -452,8 +463,10 @@ namespace TileTest
             Layer glayer = maps[currentMap].GetLayer("Ground");
             Layer olayer = maps[currentMap].GetLayer("objects");
 
-            foreach (Enemy nme in enemies)
+            for (int i = enemies.Count - 1; i >= 0; i--)
             {
+                Enemy nme = (Enemy)enemies[i];
+
                 if (hero.IsBoxColliding(nme.BoundingBoxRect) && maps[currentMap] == nme.Map && hero.state == SpriteStates.IDLE)
                 {
                     nme.Wait(1.0f);  // Make enemy wait 1.0 seconds before moving again
@@ -492,7 +505,16 @@ namespace TileTest
                         }
                     }
                 }
-                nme.Update(gameTime);
+                if (heroWep.IsBoxColliding(nme.BoundingBoxRect))
+                {
+                    score += 25;
+
+                    enemies.RemoveAt(i);
+                    heroWep = new Sprite(new Vector2(0, 0), spriteSheet, new Microsoft.Xna.Framework.Rectangle(0, 0, 0, 0), Vector2.Zero);
+                }
+                else
+                    nme.Update(gameTime);
+
             }
 
 
@@ -503,6 +525,10 @@ namespace TileTest
                 {
                     if (canMove(hero, glayer, new Vector2(-32, 0)))
                     {
+                        left = true;
+                        up = false;
+                        down = false;
+                        right = false;
                         hero = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), link, new Microsoft.Xna.Framework.Rectangle(262, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(-32, 0), duration);
                         lastDirection = Directions.LEFT;
@@ -517,6 +543,11 @@ namespace TileTest
                 {
                     if (canMove(hero, glayer, new Vector2(32, 0)))
                     {
+                        right = true;
+                        up = false;
+                        down = false;
+                        left = false;
+                        
                         hero = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), link, new Microsoft.Xna.Framework.Rectangle(322, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(32, 0), duration);
                         lastDirection = Directions.RIGHT;
@@ -531,6 +562,11 @@ namespace TileTest
                 {
                     if (canMove(hero, glayer, new Vector2(0, -32)))
                     {
+                        up = true;
+                        
+                        down = false;
+                        left = false;
+                        right = false;
                         hero = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), link, new Microsoft.Xna.Framework.Rectangle(298, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(0, -32), duration);
                         lastDirection = Directions.UP;
@@ -544,7 +580,12 @@ namespace TileTest
                 {
                     if (canMove(hero, glayer, new Vector2(0, 32)))
                     {
-                        hero = new Sprite(new Vector2 (hero.Location.X,hero.Location.Y),link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
+                        down = true;
+                        up = false;
+                        
+                        left = false;
+                        right = false;
+                        hero = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), link, new Microsoft.Xna.Framework.Rectangle(232, 0, 32, 15), Vector2.Zero);
                         hero.AnimateMove(hero.Location + new Vector2(0, 32), duration);
                         lastDirection = Directions.DOWN;
                         if (kb.IsKeyDown(Keys.Space))
@@ -553,317 +594,337 @@ namespace TileTest
                         }
                     }
                 }
-            }
 
-            
-
-            Tuple<bool, Tile> item = isItem(olayer, (int)hero.Center.X, (int)hero.Center.Y);
-            
-            if (item.Item1)  // If it is an item
-            {
-                Tile tile = item.Item2;
-
-                GameItems type = (GameItems)tile.TileIndex;
-
-                switch (type)
+                /*if (down = true && kb.IsKeyDown(Keys.Space))
                 {
-                    case GameItems.CHEST:
-
-                        if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty"))
-                        {
-                            score += 100;
-                            tile.Properties["empty"] = true;
-                            tile.TileIndex = 2925;
-                        }
-                        
-
-                        break;
-
-                    case GameItems.POTION:
-                        // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
-                        if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty") && healthNum < 6 && healthNum > 0 && score >= 100)  //Pressing F to interact does not work.
-                        {
-                            score -= 100;
-                            healthNum += 1;
-                            tile.Properties["empty"] = true;
-                            tile.TileIndex = 729;
-                        }
-                        
-                        break;
-
-                    case GameItems.POTION2:
-                        // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
-                        if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty") && healthNum < 6 && healthNum > 0 && score >= 100)  //Pressing F to interact does not work.
-                        {
-                            score -= 100;
-                            healthNum += 1;
-                            tile.Properties["empty"] = true;
-                            tile.TileIndex = 729;
-                        }
-
-                        break;
-
-                    case GameItems.WATER_CHEST:
-                        // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
-                        if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty"))  //Pressing F to interact does not work.
-                        {
-                            score += 100;
-                            tile.Properties["empty"] = true;
-                            tile.TileIndex = 729;
-                        }
-
-                        break;
-
-                    case GameItems.WATER_CHEST2:
-                        // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
-                        if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty"))  //Pressing F to interact does not work.
-                        {
-                            score += 100;
-                            tile.Properties["empty"] = true;
-                            tile.TileIndex = 729;
-                        }
-
-                        break;
-                    case GameItems.WATER:
-                        Vector2 dstination = new Vector2(32, 32);
-                        if (tile.Properties.ContainsKey("jumpto"))
-                        {
-                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-                            dstination.X = parts[0] * 32;
-                            dstination.Y = parts[1] * 32;
-                        }
-
-                        if (tile.Properties.ContainsKey("map"))
-                        {
-                            switchMap(tile.Properties["map"], dstination);
-                        }
-                        else
-                        {
-                            switchMap(currentMap, dstination);
-                        }
-                        break;
-                    case GameItems.STAIRS:
-
-                        Vector2 destination = new Vector2(32, 32);
-                        if (tile.Properties.ContainsKey("jumpto"))
-                        {
-                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-                            destination.X = parts[0] * 32;
-                            destination.Y = parts[1] * 32;
-                        }
-
-                        if (tile.Properties.ContainsKey("map"))
-                        {
-                            switchMap(tile.Properties["map"], destination);
-                        }
-                        else
-                        {
-                            switchMap(currentMap, destination);
-                        }
-
-
-                        break;
-
-                    case GameItems.MAZE_ENTER:
-
-                        Vector2 dest = new Vector2(32, 32);
-                        if (tile.Properties.ContainsKey("jumpto"))
-                        {
-                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-                            dest.X = parts[0] * 32;
-                            dest.Y = parts[1] * 32;
-                        }
-
-                        if (tile.Properties.ContainsKey("map"))
-                        {
-                            switchMap(tile.Properties["map"], dest);
-                        }
-                        else
-                        {
-                            switchMap(currentMap, dest);
-                        }
-
-                        break;
-
-                    case GameItems.DESERT_ENTER:
-
-                        Vector2 dst = new Vector2(32, 32);
-                        if (tile.Properties.ContainsKey("jumpto"))
-                        {
-                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-                            dst.X = parts[0] * 32;
-                            dst.Y = parts[1] * 32;
-                        }
-
-                        if (tile.Properties.ContainsKey("map"))
-                        {
-                            switchMap(tile.Properties["map"], dst);
-                        }
-                        else
-                        {
-                            switchMap(currentMap, dst);
-                        }
-
-                        break;
-
-                    case GameItems.HELL_ENTER:
-
-                        Vector2 dsti = new Vector2(32, 32);
-                        if (tile.Properties.ContainsKey("jumpto"))
-                        {
-                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-                            dst.X = parts[0] * 32;
-                            dst.Y = parts[1] * 32;
-                        }
-
-                        if (tile.Properties.ContainsKey("map"))
-                        {
-                            switchMap(tile.Properties["map"], dsti);
-                        }
-                        else
-                        {
-                            switchMap(currentMap, dsti);
-                        }
-
-                        break;
-
-                    case GameItems.HELL_ENTER2:
-
-                        Vector2 dstin = new Vector2(32, 32);
-                        if (tile.Properties.ContainsKey("jumpto"))
-                        {
-                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-                            dst.X = parts[0] * 32;
-                            dst.Y = parts[1] * 32;
-                        }
-
-                        if (tile.Properties.ContainsKey("map"))
-                        {
-                            switchMap(tile.Properties["map"], dstin);
-                        }
-                        else
-                        {
-                            switchMap(currentMap, dstin);
-                        }
-
-                        break;
-
-                    case GameItems.DUNGEON_EXIT:
-
-                        Vector2 dstnation = new Vector2(32, 32);
-                        if (tile.Properties.ContainsKey("jumpto"))
-                        {
-                            int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-                            destination.X = parts[0] * 32;
-                            destination.Y = parts[1] * 32;
-                        }
-
-                        if (tile.Properties.ContainsKey("map"))
-                        {
-                            switchMap(tile.Properties["map"], dstnation);
-                        }
-                        else
-                        {
-                            switchMap(currentMap, dstnation);
-                        }
-
-
-                        break;
-
-
+                    heroWep = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), spriteSheet, new Microsoft.Xna.Framework.Rectangle(1890, 290, 32, 32), new Vector2(0, 320));
                 }
+
+                if (up = true && kb.IsKeyDown(Keys.Space))
+                {
+                    heroWep = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), spriteSheet, new Microsoft.Xna.Framework.Rectangle(1762, 290, 32, 32), new Vector2(0, -320));
+                }
+                if (right = true && kb.IsKeyDown(Keys.Space))
+                {
+                    heroWep = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), spriteSheet, new Microsoft.Xna.Framework.Rectangle(1826, 290, 32, 32), new Vector2(320, 0));
+                }
+
+                if (left = true && kb.IsKeyDown(Keys.Space))
+                {
+                    heroWep = new Sprite(new Vector2(hero.Location.X, hero.Location.Y), spriteSheet, new Microsoft.Xna.Framework.Rectangle(1954, 290, 32, 32), new Vector2(-320, 0));
+                }*/
             }
 
 
-            item = isItem(glayer, (int)hero.Center.X, (int)hero.Center.Y);
 
-            if (item.Item1)  // If it is an item
-            {
-                Tile tile = item.Item2;
+                Tuple<bool, Tile> item = isItem(olayer, (int)hero.Center.X, (int)hero.Center.Y);
 
-                GameItems type = (GameItems)tile.TileIndex;
-
-                
-            }
-
-            Vector2 viewOffs = new Vector2(m_viewPort.Location.X, m_viewPort.Location.Y);
-            Vector2 screenPos = hero.Center - viewOffs;
-            Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(this.Window.ClientBounds.Width / 3, this.Window.ClientBounds.Height / 3, this.Window.ClientBounds.Width / 3, this.Window.ClientBounds.Height / 3);
-            //Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(300, 300, 300, 200);
-
-            if (!moveBox.Contains((int)screenPos.X, (int)screenPos.Y))
-            {
-                if (screenPos.X < moveBox.Left)
+                if (item.Item1)  // If it is an item
                 {
-                    m_viewPort.Location.X -= 4;
-                   
+                    Tile tile = item.Item2;
+
+                    GameItems type = (GameItems)tile.TileIndex;
+
+                    switch (type)
+                    {
+                        case GameItems.CHEST:
+
+                            if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty"))
+                            {
+                                score += 100;
+                                tile.Properties["empty"] = true;
+                                tile.TileIndex = 2925;
+                            }
+
+
+                            break;
+
+                        case GameItems.POTION:
+                            // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
+                            if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty") && healthNum < 6 && healthNum > 0 && score >= 100)  //Pressing F to interact does not work.
+                            {
+                                score -= 100;
+                                healthNum += 1;
+                                tile.Properties["empty"] = true;
+                                tile.TileIndex = 729;
+                            }
+
+                            break;
+
+                        case GameItems.POTION2:
+                            // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
+                            if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty") && healthNum < 6 && healthNum > 0 && score >= 100)  //Pressing F to interact does not work.
+                            {
+                                score -= 100;
+                                healthNum += 1;
+                                tile.Properties["empty"] = true;
+                                tile.TileIndex = 729;
+                            }
+
+                            break;
+
+                        case GameItems.WATER_CHEST:
+                            // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
+                            if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty"))  //Pressing F to interact does not work.
+                            {
+                                score += 100;
+                                tile.Properties["empty"] = true;
+                                tile.TileIndex = 729;
+                            }
+
+                            break;
+
+                        case GameItems.WATER_CHEST2:
+                            // For potion, if you land on it, it disappears right after.  You have to be holding F for the health gain to work.  It will disappear automatically no matter what.
+                            if (kb.IsKeyDown(Keys.F) && !tile.Properties.ContainsKey("empty"))  //Pressing F to interact does not work.
+                            {
+                                score += 100;
+                                tile.Properties["empty"] = true;
+                                tile.TileIndex = 729;
+                            }
+
+                            break;
+                        case GameItems.WATER:
+                            Vector2 dstination = new Vector2(32, 32);
+                            if (tile.Properties.ContainsKey("jumpto"))
+                            {
+                                int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                                dstination.X = parts[0] * 32;
+                                dstination.Y = parts[1] * 32;
+                            }
+
+                            if (tile.Properties.ContainsKey("map"))
+                            {
+                                switchMap(tile.Properties["map"], dstination);
+                            }
+                            else
+                            {
+                                switchMap(currentMap, dstination);
+                            }
+                            break;
+                        case GameItems.STAIRS:
+
+                            Vector2 destination = new Vector2(32, 32);
+                            if (tile.Properties.ContainsKey("jumpto"))
+                            {
+                                int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                                destination.X = parts[0] * 32;
+                                destination.Y = parts[1] * 32;
+                            }
+
+                            if (tile.Properties.ContainsKey("map"))
+                            {
+                                switchMap(tile.Properties["map"], destination);
+                            }
+                            else
+                            {
+                                switchMap(currentMap, destination);
+                            }
+
+
+                            break;
+
+                        case GameItems.MAZE_ENTER:
+
+                            Vector2 dest = new Vector2(32, 32);
+                            if (tile.Properties.ContainsKey("jumpto"))
+                            {
+                                int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                                dest.X = parts[0] * 32;
+                                dest.Y = parts[1] * 32;
+                            }
+
+                            if (tile.Properties.ContainsKey("map"))
+                            {
+                                switchMap(tile.Properties["map"], dest);
+                            }
+                            else
+                            {
+                                switchMap(currentMap, dest);
+                            }
+
+                            break;
+
+                        case GameItems.DESERT_ENTER:
+
+                            Vector2 dst = new Vector2(32, 32);
+                            if (tile.Properties.ContainsKey("jumpto"))
+                            {
+                                int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                                dst.X = parts[0] * 32;
+                                dst.Y = parts[1] * 32;
+                            }
+
+                            if (tile.Properties.ContainsKey("map"))
+                            {
+                                switchMap(tile.Properties["map"], dst);
+                            }
+                            else
+                            {
+                                switchMap(currentMap, dst);
+                            }
+
+                            break;
+
+                        case GameItems.HELL_ENTER:
+
+                            Vector2 dsti = new Vector2(32, 32);
+                            if (tile.Properties.ContainsKey("jumpto"))
+                            {
+                                int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                                dst.X = parts[0] * 32;
+                                dst.Y = parts[1] * 32;
+                            }
+
+                            if (tile.Properties.ContainsKey("map"))
+                            {
+                                switchMap(tile.Properties["map"], dsti);
+                            }
+                            else
+                            {
+                                switchMap(currentMap, dsti);
+                            }
+
+                            break;
+
+                        case GameItems.HELL_ENTER2:
+
+                            Vector2 dstin = new Vector2(32, 32);
+                            if (tile.Properties.ContainsKey("jumpto"))
+                            {
+                                int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                                dst.X = parts[0] * 32;
+                                dst.Y = parts[1] * 32;
+                            }
+
+                            if (tile.Properties.ContainsKey("map"))
+                            {
+                                switchMap(tile.Properties["map"], dstin);
+                            }
+                            else
+                            {
+                                switchMap(currentMap, dstin);
+                            }
+
+                            break;
+
+                        case GameItems.DUNGEON_EXIT:
+
+                            Vector2 dstnation = new Vector2(32, 32);
+                            if (tile.Properties.ContainsKey("jumpto"))
+                            {
+                                int[] parts = tile.Properties["jumpto"].ToString().Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                                destination.X = parts[0] * 32;
+                                destination.Y = parts[1] * 32;
+                            }
+
+                            if (tile.Properties.ContainsKey("map"))
+                            {
+                                switchMap(tile.Properties["map"], dstnation);
+                            }
+                            else
+                            {
+                                switchMap(currentMap, dstnation);
+                            }
+
+
+                            break;
+
+
+                    }
                 }
-                if (screenPos.X > moveBox.Right)
+
+
+                item = isItem(glayer, (int)hero.Center.X, (int)hero.Center.Y);
+
+                if (item.Item1)  // If it is an item
                 {
-                    m_viewPort.Location.X += 4;
-                    
+                    Tile tile = item.Item2;
+
+                    GameItems type = (GameItems)tile.TileIndex;
+
+
                 }
-                if (screenPos.Y > moveBox.Bottom)
+
+                Vector2 viewOffs = new Vector2(m_viewPort.Location.X, m_viewPort.Location.Y);
+                Vector2 screenPos = hero.Center - viewOffs;
+                Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(this.Window.ClientBounds.Width / 3, this.Window.ClientBounds.Height / 3, this.Window.ClientBounds.Width / 3, this.Window.ClientBounds.Height / 3);
+                //Microsoft.Xna.Framework.Rectangle moveBox = new Microsoft.Xna.Framework.Rectangle(300, 300, 300, 200);
+
+                if (!moveBox.Contains((int)screenPos.X, (int)screenPos.Y))
                 {
-                    m_viewPort.Location.Y += 4;
-                    
+                    if (screenPos.X < moveBox.Left)
+                    {
+                        m_viewPort.Location.X -= 4;
+
+                    }
+                    if (screenPos.X > moveBox.Right)
+                    {
+                        m_viewPort.Location.X += 4;
+
+                    }
+                    if (screenPos.Y > moveBox.Bottom)
+                    {
+                        m_viewPort.Location.Y += 4;
+
+                    }
+                    if (screenPos.Y < moveBox.Top)
+                    {
+                        m_viewPort.Location.Y -= 4;
+
+                    }
                 }
-                if (screenPos.Y < moveBox.Top)
+
+
+                //Tile p = layer.PickTile(new Location(10, 10), new Size(m_viewPort.Width,m_viewPort.Height));
+
+
+                Location pointer = new Location(ms.X + m_viewPort.X, ms.Y + m_viewPort.Y);
+
+                if (ms.LeftButton == ButtonState.Pressed)
                 {
-                    m_viewPort.Location.Y -= 4;
-                    
-                }
-            }
+
+                    /*Tile pt = layer.PickTile(pointer, new Size(m_viewPort.Width, m_viewPort.Height));
+                    if (pt != null && pt.Properties.Count > 0)
+                    {
+                        Window.Title = "w00t";
+                    }
+                    */
+                    //Window.Title = (q == null ? "" : "" + q.Properties.Count);
+                    Location q = glayer.GetTileLocation(pointer);
+                    if (glayer.IsValidTileLocation(q))
+                    {
+                        Tile pt = glayer.Tiles[q.X, q.Y];
+                        Location loc = glayer.ConvertLayerToMapLocation(q, new Size(m_viewPort.Width, m_viewPort.Height));
+
+                        Window.Title = (q == null ? "" : "" + q.X + " " + q.Y + " " + loc.X + " " + loc.Y + (pt.Properties.Count > 0 ? (String)pt.Properties["type"] : ""));
+                    }
 
 
-            //Tile p = layer.PickTile(new Location(10, 10), new Size(m_viewPort.Width,m_viewPort.Height));
 
 
-            Location pointer = new Location(ms.X + m_viewPort.X, ms.Y + m_viewPort.Y);
 
-            if (ms.LeftButton == ButtonState.Pressed)
-            {
-
-                /*Tile pt = layer.PickTile(pointer, new Size(m_viewPort.Width, m_viewPort.Height));
-                if (pt != null && pt.Properties.Count > 0)
-                {
-                    Window.Title = "w00t";
-                }
-                */
-                //Window.Title = (q == null ? "" : "" + q.Properties.Count);
-                Location q = glayer.GetTileLocation(pointer);
-                if (glayer.IsValidTileLocation(q))
-                {
-                    Tile pt = glayer.Tiles[q.X, q.Y];
-                    Location loc = glayer.ConvertLayerToMapLocation(q, new Size(m_viewPort.Width, m_viewPort.Height));
-
-                    Window.Title = (q == null ? "" : "" + q.X + " " + q.Y + " " + loc.X + " " + loc.Y + (pt.Properties.Count > 0 ? (String)pt.Properties["type"] : ""));
                 }
 
-                
-                
-                
-                
-            }
 
-            
 
                 // Limit ability to view offscreen
                 m_viewPort.Location.X = Math.Max(0, m_viewPort.X);
-            m_viewPort.Location.Y = Math.Max(0, m_viewPort.Y);
-            m_viewPort.Location.X = Math.Min(maps[currentMap].DisplayWidth - m_viewPort.Width, m_viewPort.X);
-            m_viewPort.Location.Y = Math.Min(maps[currentMap].DisplayHeight - m_viewPort.Height, m_viewPort.Y);
+                m_viewPort.Location.Y = Math.Max(0, m_viewPort.Y);
+                m_viewPort.Location.X = Math.Min(maps[currentMap].DisplayWidth - m_viewPort.Width, m_viewPort.X);
+                m_viewPort.Location.Y = Math.Min(maps[currentMap].DisplayHeight - m_viewPort.Height, m_viewPort.Y);
 
 
-            
 
 
-            maps[currentMap].Update(gameTime.ElapsedGameTime.Milliseconds);
-            hero.Update(gameTime);
-            heroWep.Update(gameTime);
 
-            base.Update(gameTime);
-        }
+                maps[currentMap].Update(gameTime.ElapsedGameTime.Milliseconds);
+                hero.Update(gameTime);
+                heroWep.Update(gameTime);
+
+                base.Update(gameTime);
+            }
+        
 
         /// <summary>
         /// This is called when the game should draw itself.
